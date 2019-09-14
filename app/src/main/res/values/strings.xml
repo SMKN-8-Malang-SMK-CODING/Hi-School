@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Hi School</string>
+    <string name="password">Kata Sandi</string>
+    <string name="name">Nama</string>
+    <string name="login">Login</string>
+    <string name="doesnt_have_account">Belum punya akun?</string>
+    <string name="sign_up">Daftar</string>
+    <string name="kantin_name">Nama Kantin</string>
+    <string name="description_placeholder">Deskripsi kantin, seperti menu menu</string>
+    <string name="search_food_hint">Mau makan apa hari ini...</string>
+    <string name="lipsum_news">Telah terjadi kehilangan barang berupa kontak sepeda motor</string>
+</resources>

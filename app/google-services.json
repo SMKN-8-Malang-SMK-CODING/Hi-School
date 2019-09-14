@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "42217510387",
+    "firebase_url": "https://hi-school-3b8f3.firebaseio.com",
+    "project_id": "hi-school-3b8f3",
+    "storage_bucket": "hi-school-3b8f3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:42217510387:android:0f59dc8b38938d4eff2e86",
+        "android_client_info": {
+          "package_name": "com.hischool.hischool"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "42217510387-41svkolngp8cjgvt9ijimmonuadgmosb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hischool.hischool",
+            "certificate_hash": "193a4bdc5b6f5f790a8625d36c1344714b2da688"
+          }
+        },
+        {
+          "client_id": "42217510387-1ufo7rk9lacgnqit3gojnsuvk6lgmnat.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATdlowXuF3QwITBgDEOY7gt4xwzADCagY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "42217510387-1ufo7rk9lacgnqit3gojnsuvk6lgmnat.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

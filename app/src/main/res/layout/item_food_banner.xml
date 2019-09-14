@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="300dp"
+    android:layout_height="150dp"
+    android:layout_margin="10dp"
+    app:cardCornerRadius="17dp"
+    app:cardElevation="6dp">
+
+    <ImageView
+        android:id="@+id/iv_image_food_banner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        tools:src="@drawable/steak" />
+
+</androidx.cardview.widget.CardView>

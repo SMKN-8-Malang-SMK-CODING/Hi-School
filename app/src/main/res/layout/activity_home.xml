@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".home.HomeActivity">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_list_news_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="105dp"
+        android:clipToPadding="false"
+        android:overScrollMode="never"
+        android:paddingTop="28dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView"
+        tools:listitem="@layout/item_row_news" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="Selamat Datang Ibra!"
+        android:textSize="32sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:srcCompat="@drawable/bg_home_menu" />
+
+    <ImageButton
+        android:id="@+id/btnReport"
+        android:layout_width="79dp"
+        android:layout_height="75dp"
+        android:layout_marginEnd="60dp"
+        android:background="@drawable/img_danger"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="@+id/imageView" />
+
+    <ImageButton
+        android:id="@+id/btnFood"
+        android:layout_width="79dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="60dp"
+        android:background="@drawable/img_plate"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="@+id/imageView" />
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_list_news"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="125dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <include layout="@layout/item_shimmer_news" />
+
+            <include layout="@layout/item_shimmer_news" />
+
+            <include layout="@layout/item_shimmer_news" />
+
+            <include layout="@layout/item_shimmer_news" />
+
+            <include layout="@layout/item_shimmer_news" />
+
+            <include layout="@layout/item_shimmer_news" />
+
+        </LinearLayout>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

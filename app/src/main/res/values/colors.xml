@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#55EFC4</color>
+    <color name="colorPrimaryDark">#39B997</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="colorBackground">#FFFFFF</color>
+
+    <color name="colorTextHint">#80408E78</color>
+
+    <color name="colorShimmerBase">#A7A7A7</color>
+    <color name="colorShimmerHighlight">#E6E6E6</color>
+</resources>
