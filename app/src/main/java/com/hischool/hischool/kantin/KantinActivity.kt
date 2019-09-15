@@ -1,6 +1,9 @@
 package com.hischool.hischool.kantin
 
 import android.os.Bundle
+import android.view.inputmethod.EditorInfo
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.ktx.firestore
@@ -10,6 +13,7 @@ import com.hischool.hischool.R
 import com.hischool.hischool.data.entity.FoodRecommendation
 import com.hischool.hischool.data.entity.Kantin
 import com.hischool.hischool.utils.ButtonHelper
+import com.hischool.hischool.utils.KeyboardHelper
 import com.hischool.hischool.utils.ShimmerHelper
 import kotlinx.android.synthetic.main.activity_kantin.*
 
@@ -24,6 +28,20 @@ class KantinActivity : AppCompatActivity() {
         setContentView(R.layout.activity_kantin)
 
         ButtonHelper.setupBackButton(this, btnKantinBack)
+
+        et_kantin_search.setOnEditorActionListener(TextView.OnEditorActionListener { _, actionId, _ ->
+
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+
+                KeyboardHelper.hideKeyboard(this)
+
+                Toast.makeText(this, "Searching ${et_kantin_search.text}", Toast.LENGTH_SHORT)
+                    .show()
+                return@OnEditorActionListener true;
+            }
+
+            return@OnEditorActionListener false
+        })
 
         rv_list_kantin_container.apply {
             layoutManager = LinearLayoutManager(this@KantinActivity)

@@ -31,7 +31,7 @@
         app:layout_constraintTop_toTopOf="@+id/btnKantinBack" />
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/et_kantin_search"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -40,6 +40,7 @@
         android:background="@drawable/bg_search"
         android:ems="10"
         android:hint="@string/search_food_hint"
+        android:imeOptions="actionSearch"
         android:inputType="textPersonName"
         android:paddingStart="50dp"
         android:paddingEnd="50dp"
@@ -57,9 +58,9 @@
         android:layout_width="19dp"
         android:layout_height="19dp"
         android:layout_marginStart="24dp"
-        app:layout_constraintBottom_toBottomOf="@+id/editText3"
-        app:layout_constraintStart_toStartOf="@+id/editText3"
-        app:layout_constraintTop_toTopOf="@+id/editText3"
+        app:layout_constraintBottom_toBottomOf="@+id/et_kantin_search"
+        app:layout_constraintStart_toStartOf="@+id/et_kantin_search"
+        app:layout_constraintTop_toTopOf="@+id/et_kantin_search"
         app:layout_constraintVertical_bias="0.44"
         app:srcCompat="@drawable/magnifying_glass" />
 
@@ -71,7 +72,7 @@
         android:foregroundGravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText3" />
+        app:layout_constraintTop_toBottomOf="@+id/et_kantin_search" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_list_kantin_container"
@@ -90,7 +91,7 @@
         android:layout_height="170dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText3"
+        app:layout_constraintTop_toBottomOf="@+id/et_kantin_search"
         app:shimmer_base_color="@color/colorShimmerBase"
         tools:visibility="gone">
 

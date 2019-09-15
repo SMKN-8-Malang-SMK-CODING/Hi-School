@@ -11,13 +11,19 @@ import com.hischool.hischool.data.entity.ChartItem
 import kotlinx.android.synthetic.main.item_row_chart.view.*
 
 class ChartAdapter(val context: Context) : RecyclerView.Adapter<ChartAdapter.ViewHolder>() {
-    private val chartItems = ArrayList<ChartItem>()
+    public val chartItems = ArrayList<ChartItem>()
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
     fun setChartItems(items: ArrayList<ChartItem>) {
         chartItems.clear()
         chartItems.addAll(items)
+        notifyDataSetChanged()
+    }
+
+    fun deleteFirstItem() {
+        chartItems.removeAt(0)
+        notifyItemRemoved(0)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
