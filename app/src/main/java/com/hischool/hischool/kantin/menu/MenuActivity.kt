@@ -1,11 +1,14 @@
 package com.hischool.hischool.kantin.menu
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hischool.hischool.R
 import com.hischool.hischool.data.entity.Menu
-import com.hischool.hischool.utils.BackButtonHelper
+import com.hischool.hischool.kantin.chart.ChartActivity
+import com.hischool.hischool.utils.ButtonHelper
 import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter
 import kotlinx.android.synthetic.main.activity_menu.*
 
@@ -18,7 +21,11 @@ class MenuActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
 
-        BackButtonHelper.setupButton(this, btnKantinMenuBack)
+        ButtonHelper.setupBackButton(this, btnKantinMenuBack)
+
+        ButtonHelper.setupWideClick(btnOpenChart, View.OnClickListener {
+            startActivity(Intent(this, ChartActivity::class.java))
+        })
 
         tvMenuTitle.text = intent.getStringExtra(EXTRA_TITLE)!!
 

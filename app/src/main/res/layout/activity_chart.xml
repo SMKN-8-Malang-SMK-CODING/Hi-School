@@ -7,7 +7,7 @@
     tools:context=".kantin.chart.ChartActivity">
 
     <Button
-        android:id="@+id/btnKantinMenuBack2"
+        android:id="@+id/btnChartBack"
         android:layout_width="17dp"
         android:layout_height="32dp"
         android:layout_marginStart="24dp"
@@ -23,28 +23,49 @@
         android:text="Keranjang"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/btnKantinMenuBack2"
+        app:layout_constraintBottom_toBottomOf="@+id/btnChartBack"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/btnKantinMenuBack2" />
+        app:layout_constraintTop_toTopOf="@+id/btnChartBack" />
 
     <ImageView
         android:id="@+id/imageView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
-        app:layout_constraintBottom_toBottomOf="@+id/btnKantinMenuBack2"
+        app:layout_constraintBottom_toBottomOf="@+id/btnChartBack"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/btnKantinMenuBack2"
+        app:layout_constraintTop_toTopOf="@+id/btnChartBack"
         app:srcCompat="@drawable/bg_btn_close_red" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_list_chart_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="34dp"
+        android:clipToPadding="false"
+        android:paddingTop="8dp"
+        android:paddingBottom="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/button3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvMenuTitle2"
         tools:listitem="@layout/item_row_chart" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/bg_btn_order"
+        android:paddingBottom="5dp"
+        android:text="Pesan"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/rv_list_chart_container" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -50,11 +50,6 @@
                         android:layout_marginTop="5dp"
                         android:background="@drawable/bg_item_desc_shimmer" />
 
-                    <View
-                        android:id="@+id/divider"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="?android:attr/listDivider" />
                 </LinearLayout>
 
 
@@ -78,7 +73,7 @@
                 <TextView
                     android:layout_width="180dp"
                     android:layout_height="15dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="8dp"
                     android:background="@drawable/bg_item_long_text_shimmer"
                     android:gravity="bottom"
                     android:textSize="17sp" />

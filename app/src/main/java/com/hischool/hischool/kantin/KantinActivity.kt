@@ -9,7 +9,7 @@ import com.google.firebase.ktx.Firebase
 import com.hischool.hischool.R
 import com.hischool.hischool.data.entity.FoodRecommendation
 import com.hischool.hischool.data.entity.Kantin
-import com.hischool.hischool.utils.BackButtonHelper
+import com.hischool.hischool.utils.ButtonHelper
 import com.hischool.hischool.utils.ShimmerHelper
 import kotlinx.android.synthetic.main.activity_kantin.*
 
@@ -23,7 +23,7 @@ class KantinActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_kantin)
 
-        BackButtonHelper.setupButton(this, btnKantinBack)
+        ButtonHelper.setupBackButton(this, btnKantinBack)
 
         rv_list_kantin_container.apply {
             layoutManager = LinearLayoutManager(this@KantinActivity)

@@ -6,8 +6,14 @@ import android.view.TouchDelegate
 import android.view.View
 import android.widget.Button
 
-object BackButtonHelper {
-    fun setupButton(activity: Activity, button: Button) {
+object ButtonHelper {
+    fun setupBackButton(activity: Activity, button: Button) {
+        setupWideClick(button, View.OnClickListener {
+            activity.onBackPressed()
+        })
+    }
+
+    fun setupWideClick(button: View, onClickListener: View.OnClickListener) {
         val parent = button.parent as View  // button: the view you want to enlarge hit area
 
         parent.post {
@@ -23,8 +29,6 @@ object BackButtonHelper {
             parent.touchDelegate = TouchDelegate(rect, button)
         }
 
-        button.setOnClickListener {
-            activity.onBackPressed()
-        }
+        button.setOnClickListener(onClickListener)
     }
 }

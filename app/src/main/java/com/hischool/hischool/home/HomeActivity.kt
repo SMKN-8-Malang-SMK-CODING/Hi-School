@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.hischool.hischool.R
 import com.hischool.hischool.data.entity.News
 import com.hischool.hischool.kantin.KantinActivity
+import com.hischool.hischool.lapor.LaporActivity
 import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter
 import kotlinx.android.synthetic.main.activity_home.*
 
@@ -18,6 +19,10 @@ class HomeActivity : AppCompatActivity() {
 
         btnFood.setOnClickListener {
             startActivity(Intent(this, KantinActivity::class.java))
+        }
+
+        btnReport.setOnClickListener {
+            startActivity(Intent(this, LaporActivity::class.java))
         }
 
         val news = arrayListOf<News>(
