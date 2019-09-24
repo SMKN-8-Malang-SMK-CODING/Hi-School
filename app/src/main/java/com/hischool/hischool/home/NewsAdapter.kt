@@ -9,9 +9,18 @@ import com.hischool.hischool.R
 import com.hischool.hischool.data.entity.News
 import kotlinx.android.synthetic.main.item_row_news.view.*
 
-class NewsAdapter(private val context: Context, private val news: ArrayList<News>) :
+class NewsAdapter(private val context: Context) :
     RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
+
+    private val news = ArrayList<News>()
+
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view)
+
+    fun setNews(news: ArrayList<News>) {
+        this.news.clear()
+        this.news.addAll(news)
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.item_row_news, parent, false)
@@ -24,8 +33,10 @@ class NewsAdapter(private val context: Context, private val news: ArrayList<News
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.itemView.tv_news_news.text = context.getString(R.string.lipsum_news)
-        holder.itemView.tv_news_poster_name.text = "Diva"
-        holder.itemView.tv_news_publish_time.text = "18.04 WIB"
+        val currentNews = this.news[position]
+
+        holder.itemView.tv_news_news.text = currentNews.news
+        holder.itemView.tv_news_poster_name.text = currentNews.poster
+        holder.itemView.tv_news_publish_time.text = currentNews.publishTime.toGMTString()
     }
 }

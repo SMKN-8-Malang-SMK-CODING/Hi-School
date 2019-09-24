@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:paddingBottom="20dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:focusable="true"
         android:focusableInTouchMode="true"
         tools:context=".LoginActivity">
@@ -36,19 +36,20 @@
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editText2" />
+            app:layout_constraintTop_toBottomOf="@+id/edt_login_input_password" />
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/edt_login_input_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
             android:background="@drawable/bg_input"
             android:ems="10"
-            android:hint="@string/name"
-            android:inputType="textPersonName"
-            android:paddingStart="50dp"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
+            android:paddingStart="55dp"
             android:paddingEnd="20dp"
+            android:paddingBottom="5dp"
             android:textColor="@color/colorPrimary"
             android:textColorHint="@color/colorTextHint"
             android:textCursorDrawable="@drawable/color_cursor"
@@ -60,38 +61,40 @@
             android:id="@+id/imageView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            app:layout_constraintBottom_toBottomOf="@+id/editText"
-            app:layout_constraintStart_toStartOf="@+id/editText"
-            app:layout_constraintTop_toTopOf="@+id/editText"
+            android:layout_marginStart="24dp"
+            android:layout_marginBottom="5dp"
+            app:layout_constraintBottom_toBottomOf="@+id/edt_login_input_email"
+            app:layout_constraintStart_toStartOf="@+id/edt_login_input_email"
+            app:layout_constraintTop_toTopOf="@+id/edt_login_input_email"
             app:srcCompat="@drawable/avatar" />
 
         <EditText
-            android:id="@+id/editText2"
+            android:id="@+id/edt_login_input_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:background="@drawable/bg_input"
             android:ems="10"
             android:hint="@string/password"
-            android:inputType="textPersonName"
-            android:paddingStart="50dp"
+            android:inputType="textPassword"
+            android:paddingStart="55dp"
             android:paddingEnd="20dp"
+            android:paddingBottom="5dp"
             android:textColor="@color/colorPrimary"
             android:textColorHint="@color/colorTextHint"
             android:textCursorDrawable="@drawable/color_cursor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editText" />
+            app:layout_constraintTop_toBottomOf="@+id/edt_login_input_email" />
 
         <ImageView
             android:id="@+id/imageView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            app:layout_constraintBottom_toBottomOf="@+id/editText2"
-            app:layout_constraintStart_toStartOf="@+id/editText2"
-            app:layout_constraintTop_toTopOf="@+id/editText2"
+            android:layout_marginStart="24dp"
+            android:layout_marginBottom="5dp"
+            app:layout_constraintBottom_toBottomOf="@+id/edt_login_input_password"
+            app:layout_constraintStart_toStartOf="@+id/edt_login_input_password"
+            app:layout_constraintTop_toTopOf="@+id/edt_login_input_password"
             app:srcCompat="@drawable/padlock" />
 
         <TextView
@@ -116,6 +119,18 @@
             app:layout_constraintBottom_toBottomOf="@+id/textView4"
             app:layout_constraintStart_toEndOf="@+id/textView4"
             app:layout_constraintTop_toTopOf="@+id/textView4" />
+
+        <ProgressBar
+            android:id="@+id/pb_loading_indicator"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/common_google_signin_btn_text_dark_pressed"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

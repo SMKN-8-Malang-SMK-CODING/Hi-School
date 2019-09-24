@@ -9,4 +9,6 @@
 
     <color name="colorShimmerBase">#A7A7A7</color>
     <color name="colorShimmerHighlight">#E6E6E6</color>
+
+    <color name="gray"></color>
 </resources>

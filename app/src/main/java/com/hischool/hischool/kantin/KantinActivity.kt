@@ -37,7 +37,8 @@ class KantinActivity : AppCompatActivity() {
 
                 Toast.makeText(this, "Searching ${et_kantin_search.text}", Toast.LENGTH_SHORT)
                     .show()
-                return@OnEditorActionListener true;
+
+                return@OnEditorActionListener true
             }
 
             return@OnEditorActionListener false

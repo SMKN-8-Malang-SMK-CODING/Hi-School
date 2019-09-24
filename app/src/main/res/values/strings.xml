@@ -9,4 +9,5 @@
     <string name="description_placeholder">Deskripsi kantin, seperti menu menu</string>
     <string name="search_food_hint">Mau makan apa hari ini...</string>
     <string name="lipsum_news">Telah terjadi kehilangan barang berupa kontak sepeda motor</string>
+    <string name="email">Email</string>
 </resources>

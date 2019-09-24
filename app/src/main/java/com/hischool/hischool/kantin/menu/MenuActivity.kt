@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.hischool.hischool.R
 import com.hischool.hischool.data.entity.Menu
 import com.hischool.hischool.kantin.chart.ChartActivity
+import com.hischool.hischool.utils.AuthHelper
 import com.hischool.hischool.utils.ButtonHelper
 import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter
 import kotlinx.android.synthetic.main.activity_menu.*
@@ -21,6 +22,7 @@ class MenuActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
 
+        AuthHelper.loginCheck(this)
         ButtonHelper.setupBackButton(this, btnKantinMenuBack)
 
         ButtonHelper.setupWideClick(btnOpenChart, View.OnClickListener {

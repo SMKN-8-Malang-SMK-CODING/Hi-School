@@ -11,7 +11,7 @@ import com.hischool.hischool.data.entity.ChartItem
 import kotlinx.android.synthetic.main.item_row_chart.view.*
 
 class ChartAdapter(val context: Context) : RecyclerView.Adapter<ChartAdapter.ViewHolder>() {
-    public val chartItems = ArrayList<ChartItem>()
+    val chartItems = ArrayList<ChartItem>()
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
@@ -21,9 +21,9 @@ class ChartAdapter(val context: Context) : RecyclerView.Adapter<ChartAdapter.Vie
         notifyDataSetChanged()
     }
 
-    fun deleteFirstItem() {
-        chartItems.removeAt(0)
-        notifyItemRemoved(0)
+    fun deleteItemAt(position: Int) {
+        chartItems.removeAt(position)
+        notifyItemRemoved(position)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -41,6 +41,10 @@ class ChartAdapter(val context: Context) : RecyclerView.Adapter<ChartAdapter.Vie
         holder.itemView.tv_chart_food_desc.text = chartItem.foodDesc
 
         Glide.with(context).load(chartItem.imageUrl).into(holder.itemView.iv_chart_food_image)
+
+        holder.itemView.btnDeleteSingleItem.setOnClickListener {
+            deleteItemAt(position)
+        }
     }
 
 
