@@ -1,4 +1,4 @@
-package com.hischool.hischool
+package com.hischool.hischool.login
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,12 +8,14 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
+import com.hischool.hischool.R
 import com.hischool.hischool.home.HomeActivity
+import com.hischool.hischool.utils.KeyboardHelper
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
 
-    val firestore = FirebaseFirestore.getInstance()
+    private val firestore = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,19 +29,28 @@ class LoginActivity : AppCompatActivity() {
             val email = edt_login_input_email.text.toString()
             val password = edt_login_input_password.text.toString()
 
+            var notValid = false;
+
             if (email.isEmpty()) {
-                edt_login_input_email.error = "Harap isi email anda..."
+                edt_login_input_email.error = "Email tidak boleh kosong"
+                notValid = true
             }
 
             if (password.isEmpty()) {
-                edt_login_input_password.error = "Harap isi password anda"
+                edt_login_input_password.error = "Password tidak boleh kosong"
+                notValid = true
             }
 
-            if (email.isEmpty() || password.isEmpty()) {
+            if (!KeyboardHelper.isValidEmail(email)) {
+                edt_login_input_email.error = "Harap isi email anda dengan benar"
+                notValid = true
+            }
+
+            if (notValid) {
                 return@setOnClickListener
             }
 
-            pb_loading_indicator.visibility = View.VISIBLE
+            startLoading()
 
             FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
                 .addOnSuccessListener {
@@ -57,10 +68,28 @@ class LoginActivity : AppCompatActivity() {
                             moveToHome()
                         }
                 }.addOnFailureListener {
-                    pb_loading_indicator.visibility = View.GONE
+                    stopLoading()
+
                     Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
                 }
         }
+    }
+
+    private fun startLoading() {
+        pb_loading_indicator.visibility = View.VISIBLE
+        iv_loading_background.visibility = View.VISIBLE
+        btnLogin.visibility = View.GONE
+
+        pb_loading_indicator.indeterminateDrawable.setColorFilter(
+            getColor(R.color.colorPrimary),
+            android.graphics.PorterDuff.Mode.MULTIPLY
+        );
+    }
+
+    private fun stopLoading() {
+        pb_loading_indicator.visibility = View.GONE
+        iv_loading_background.visibility = View.GONE
+        btnLogin.visibility = View.VISIBLE
     }
 
     private fun moveToHome() {

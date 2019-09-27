@@ -6,6 +6,7 @@
     <color name="colorBackground">#FFFFFF</color>
 
     <color name="colorTextHint">#80408E78</color>
+    <color name="colorGray">#803D3D3D</color>
 
     <color name="colorShimmerBase">#A7A7A7</color>
     <color name="colorShimmerHighlight">#E6E6E6</color>

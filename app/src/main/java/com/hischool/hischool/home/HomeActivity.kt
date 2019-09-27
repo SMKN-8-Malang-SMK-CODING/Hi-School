@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObject
 import com.hischool.hischool.R
@@ -28,7 +29,7 @@ class HomeActivity : AppCompatActivity() {
 
         FirebaseFirestore.getInstance().collection("users").document(currentUser?.uid!!).get()
             .addOnSuccessListener {
-                val data: User? = it.toObject()
+                val data = it.toObject<User>()
 
                 tv_user_name.text = data?.nickname
             }
@@ -47,11 +48,46 @@ class HomeActivity : AppCompatActivity() {
         }
 
         val news = arrayListOf(
-            News("Emil", Date(), "hp saya hilang", Date()),
-            News("Dillah", Date(), "hp teman saya hilang", Date()),
-            News("Abdillah", Date(), "hp emil hilang", Date()),
-            News("Aufal", Date(), "", Date()),
-            News("Mustacskdfhk", Date(), "", Date())
+            News(
+                1,
+                "Sapras",
+                "http://hotprintdesign.com/wp-content/uploads/2019/02/Sani-Sebastian.png",
+                1,
+                Timestamp(Date()),
+                "Telah hilang atau belum dikembalikan sebuah stop kontak berwarna merah"
+            ),
+            News(
+                1,
+                "Humas",
+                "http://hotprintdesign.com/wp-content/uploads/2019/02/Sani-Sebastian.png",
+                1,
+                Timestamp(Date()),
+                "Besok akan diadakan simulasi PAS"
+            ),
+            News(
+                1,
+                "Kesiswaan",
+                "http://hotprintdesign.com/wp-content/uploads/2019/02/Sani-Sebastian.png",
+                1,
+                Timestamp(Date()),
+                "Kemarin ada laporan tentang siswa merokok di matos menggunakan seragam"
+            ),
+            News(
+                1,
+                "Kesiswaan",
+                "http://hotprintdesign.com/wp-content/uploads/2019/02/Sani-Sebastian.png",
+                1,
+                Timestamp(Date()),
+                "Telah terjadi pencurian sebuah hp iPhone X di kelas XII RPL Z"
+            ),
+            News(
+                1,
+                "Sapras",
+                "http://hotprintdesign.com/wp-content/uploads/2019/02/Sani-Sebastian.png",
+                1,
+                Timestamp(Date()),
+                "Bagi yang terlambat mengembalikan akan didenda Rp 2000 per harinya"
+            )
         )
 
         rv_list_news_container.apply {

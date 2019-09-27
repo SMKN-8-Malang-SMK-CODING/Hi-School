@@ -33,21 +33,25 @@ class MenuActivity : AppCompatActivity() {
 
         val listMenu = arrayListOf(
             Menu(
+                1,
                 "Pizza",
                 260000,
                 "https://media-cdn.tripadvisor.com/media/photo-s/15/c5/a4/14/pepperoni-lovers.jpg"
             ),
             Menu(
+                1,
                 "T-Bone Steak",
                 75000,
                 "https://images-gmi-pmc.edge-generalmills.com/b57ee35f-bce2-4229-8bf5-19b97876a4cb.jpg"
             ),
             Menu(
+                1,
                 "Kebab",
                 2000,
                 "https://www.palmia.co.id/media/recipe/medium/0dd0dc65af50d243a646a620cc07818f.jpg"
             ),
             Menu(
+                1,
                 "Southern Fried Chicken",
                 20000,
                 "https://sparkpeo.hs.llnwd.net/e1/resize/630m620/e4/nw/9/5/lSouthern-Fried-Chicken951607233.jpg"

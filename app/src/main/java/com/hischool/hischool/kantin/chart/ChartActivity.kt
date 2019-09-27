@@ -32,97 +32,116 @@ class ChartActivity : AppCompatActivity() {
 
         val charts = arrayListOf(
             ChartItem(
+                1,
                 "Bakso",
                 "Enak cuy",
                 5000,
                 "https://media-cdn.tripadvisor.com/media/photo-s/15/c5/a4/14/pepperoni-lovers.jpg"
             ),
             ChartItem(
+                1,
                 "Bakso",
                 "Enak cuy",
                 5000,
                 "https://media-cdn.tripadvisor.com/media/photo-s/15/c5/a4/14/pepperoni-lovers.jpg"
             ), ChartItem(
+                1,
                 "Bakso",
                 "Enak cuy",
                 5000,
                 "https://media-cdn.tripadvisor.com/media/photo-s/15/c5/a4/14/pepperoni-lovers.jpg"
             ), ChartItem(
+                1,
                 "Bakso",
                 "Enak cuy",
                 5000,
                 "https://media-cdn.tripadvisor.com/media/photo-s/15/c5/a4/14/pepperoni-lovers.jpg"
             ), ChartItem(
+                1,
                 "Bakso",
                 "Enak cuy",
                 5000,
                 "https://media-cdn.tripadvisor.com/media/photo-s/15/c5/a4/14/pepperoni-lovers.jpg"
             ), ChartItem(
+                1,
                 "Bakso",
                 "Enak cuy",
                 5000,
                 "https://media-cdn.tripadvisor.com/media/photo-s/15/c5/a4/14/pepperoni-lovers.jpg"
             ), ChartItem(
+                1,
                 "Bakso",
                 "Enak cuy",
                 5000,
                 "https://media-cdn.tripadvisor.com/media/photo-s/15/c5/a4/14/pepperoni-lovers.jpg"
             ), ChartItem(
+                1,
                 "Bakso",
                 "Enak cuy",
                 5000,
                 "https://media-cdn.tripadvisor.com/media/photo-s/15/c5/a4/14/pepperoni-lovers.jpg"
             ), ChartItem(
+                1,
                 "Bakso",
                 "Enak cuy",
                 5000,
                 "https://media-cdn.tripadvisor.com/media/photo-s/15/c5/a4/14/pepperoni-lovers.jpg"
             ), ChartItem(
+                1,
                 "Bakso",
                 "Enak cuy",
                 5000,
                 "https://media-cdn.tripadvisor.com/media/photo-s/15/c5/a4/14/pepperoni-lovers.jpg"
             ), ChartItem(
+                1,
                 "Bakso",
                 "Enak cuy",
                 5000,
                 "https://media-cdn.tripadvisor.com/media/photo-s/15/c5/a4/14/pepperoni-lovers.jpg"
             ), ChartItem(
+                1,
                 "Bakso",
                 "Enak cuy",
                 5000,
                 "https://media-cdn.tripadvisor.com/media/photo-s/15/c5/a4/14/pepperoni-lovers.jpg"
             ), ChartItem(
+                1,
                 "Bakso",
                 "Enak cuy",
                 5000,
                 "https://media-cdn.tripadvisor.com/media/photo-s/15/c5/a4/14/pepperoni-lovers.jpg"
             ), ChartItem(
+                1,
                 "Bakso",
                 "Enak cuy",
                 5000,
                 "https://media-cdn.tripadvisor.com/media/photo-s/15/c5/a4/14/pepperoni-lovers.jpg"
             ), ChartItem(
+                1,
                 "Bakso",
                 "Enak cuy",
                 5000,
                 "https://media-cdn.tripadvisor.com/media/photo-s/15/c5/a4/14/pepperoni-lovers.jpg"
             ), ChartItem(
+                1,
                 "Bakso",
                 "Enak cuy",
                 5000,
                 "https://media-cdn.tripadvisor.com/media/photo-s/15/c5/a4/14/pepperoni-lovers.jpg"
             ), ChartItem(
+                1,
                 "Bakso",
                 "Enak cuy",
                 5000,
                 "https://media-cdn.tripadvisor.com/media/photo-s/15/c5/a4/14/pepperoni-lovers.jpg"
             ), ChartItem(
+                1,
                 "Bakso",
                 "Enak cuy",
                 5000,
                 "https://media-cdn.tripadvisor.com/media/photo-s/15/c5/a4/14/pepperoni-lovers.jpg"
             ), ChartItem(
+                1,
                 "Bakso",
                 "Enak cuy",
                 5000,

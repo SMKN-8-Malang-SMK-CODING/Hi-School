@@ -5,8 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.hischool.hischool.R
 import com.hischool.hischool.data.entity.News
+import com.hischool.hischool.utils.NumberFormatter
 import kotlinx.android.synthetic.main.item_row_news.view.*
 
 class NewsAdapter(private val context: Context) :
@@ -37,6 +39,10 @@ class NewsAdapter(private val context: Context) :
 
         holder.itemView.tv_news_news.text = currentNews.news
         holder.itemView.tv_news_poster_name.text = currentNews.poster
-        holder.itemView.tv_news_publish_time.text = currentNews.publishTime.toGMTString()
+        holder.itemView.tv_news_publish_time.text =
+            NumberFormatter.formatDate(currentNews.publishTime.toDate())
+
+        Glide.with(context).load(currentNews.posterImageUrl).placeholder(R.color.colorShimmerBase)
+            .into(holder.itemView.iv_news_profile_picture)
     }
 }

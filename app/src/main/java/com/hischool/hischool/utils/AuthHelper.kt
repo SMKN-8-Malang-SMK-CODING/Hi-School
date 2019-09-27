@@ -4,7 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.hischool.hischool.LoginActivity
+import com.hischool.hischool.login.LoginActivity
 
 object AuthHelper {
     fun loginCheck(context: Activity): FirebaseUser? {
