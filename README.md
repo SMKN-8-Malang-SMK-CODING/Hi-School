@@ -1,3 +1,3 @@
 # H!-School
 
-Simple Go-Jek application for school!
+Simple Go-Jek like application for school!
