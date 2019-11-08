@@ -17,11 +17,11 @@ import com.hischool.hischool.data.entity.Report
 import com.hischool.hischool.data.entity.User
 import com.hischool.hischool.utils.AuthHelper
 import com.hischool.hischool.utils.ButtonHelper
-import kotlinx.android.synthetic.main.activity_violent_report.*
+import kotlinx.android.synthetic.main.activity_facility_report.*
 import java.io.IOException
 import java.util.*
 
-class ViolationReport : AppCompatActivity() {
+class FacilityReport : AppCompatActivity() {
     private val PICK_IMAGE_REQUEST = 71
 
     private var filePath: Uri? = null
@@ -34,7 +34,7 @@ class ViolationReport : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_violent_report)
+        setContentView(R.layout.activity_facility_report)
 
         currentUser = AuthHelper.loginCheck(this)
 
@@ -44,7 +44,7 @@ class ViolationReport : AppCompatActivity() {
             }
         })
 
-        ButtonHelper.setupBackButton(this, btnBackViolation)
+        ButtonHelper.setupBackButton(this, btnBackFacility)
 
         btnUpload.setOnClickListener {
             chooseImage()
@@ -69,7 +69,7 @@ class ViolationReport : AppCompatActivity() {
                     currentUser?.uid,
                     reportId,
                     reportDesc,
-                    "violation"
+                    "facility"
                 )
             )
 

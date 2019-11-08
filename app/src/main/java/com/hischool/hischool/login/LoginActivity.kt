@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
@@ -29,7 +30,7 @@ class LoginActivity : AppCompatActivity() {
             val email = edt_login_input_email.text.toString()
             val password = edt_login_input_password.text.toString()
 
-            var notValid = false;
+            var notValid = false
 
             if (email.isEmpty()) {
                 edt_login_input_email.error = "Email tidak boleh kosong"
@@ -81,10 +82,11 @@ class LoginActivity : AppCompatActivity() {
         btnLogin.visibility = View.GONE
 
         pb_loading_indicator.indeterminateDrawable.setColorFilter(
-            getColor(R.color.colorPrimary),
+            ContextCompat.getColor(this, R.color.colorPrimary),
             android.graphics.PorterDuff.Mode.MULTIPLY
-        );
+        )
     }
+
 
     private fun stopLoading() {
         pb_loading_indicator.visibility = View.GONE

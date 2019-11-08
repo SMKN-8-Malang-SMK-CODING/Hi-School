@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".lapor.form.ViolationReport">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="16dp">
+
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lapor ke Kesiswaan"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/btnBackViolation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btnBackViolation" />
+
+        <Button
+            android:id="@+id/btnBackViolation"
+            android:layout_width="17dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_btn_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/ivContainer"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:layout_margin="36dp"
+            app:cardCornerRadius="21dp"
+            app:cardElevation="2dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView3"
+            app:srcCompat="@drawable/bg_report_picture">
+
+            <ImageView
+                android:id="@+id/imagePreview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop" />
+
+        </androidx.cardview.widget.CardView>
+
+        <Button
+            android:id="@+id/btnUpload"
+            android:layout_width="43dp"
+            android:layout_height="35dp"
+            android:background="@drawable/photo_camera"
+            app:layout_constraintBottom_toBottomOf="@+id/ivContainer"
+            app:layout_constraintEnd_toEndOf="@+id/ivContainer"
+            app:layout_constraintStart_toStartOf="@+id/ivContainer"
+            app:layout_constraintTop_toTopOf="@+id/ivContainer" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:cardCornerRadius="17dp"
+            app:cardElevation="6dp"
+            app:layout_constraintEnd_toEndOf="@+id/ivContainer"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/ivContainer"
+            app:layout_constraintTop_toBottomOf="@+id/ivContainer">
+
+            <EditText
+                android:id="@+id/edtReportDescription"
+                android:layout_width="match_parent"
+                android:layout_height="270dp"
+                android:background="@android:color/transparent"
+                android:ems="10"
+                android:gravity="start|top"
+                android:hint="Ceritakan masalahnya..."
+                android:inputType="textMultiLine"
+                android:isScrollContainer="true"
+                android:padding="12dp"
+                android:textColor="@color/colorGray" />
+        </androidx.cardview.widget.CardView>
+
+        <Button
+            android:id="@+id/btnSubmitReport"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_button"
+            android:text="Lapor"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="@+id/cardView"
+            app:layout_constraintStart_toStartOf="@+id/cardView"
+            app:layout_constraintTop_toBottomOf="@+id/cardView" />
+
+        <FrameLayout
+            android:id="@+id/frame_loading"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@android:color/white"
+            android:elevation="20dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/img_upload" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="56dp"
+                android:text="Mengunggah laporan, harap tungu..."
+                android:textSize="18sp" />
+        </FrameLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

@@ -5,8 +5,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.Timestamp
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ktx.toObject
 import com.hischool.hischool.R
 import com.hischool.hischool.data.entity.News
 import com.hischool.hischool.data.entity.User
@@ -27,13 +25,11 @@ class HomeActivity : AppCompatActivity() {
 
         val currentUser = AuthHelper.loginCheck(this)
 
-        FirebaseFirestore.getInstance().collection("users").document(currentUser?.uid!!).get()
-            .addOnSuccessListener {
-                val data = it.toObject<User>()
-
-                tv_user_name.text = data?.nickname
+        AuthHelper.getUserData(currentUser!!, object : AuthHelper.UserDataListener {
+            override fun onUserData(userData: User) {
+                tv_user_name.text = userData.nickname
             }
-
+        })
 
         btnFood.setOnClickListener {
             startActivity(Intent(this, KantinActivity::class.java))
