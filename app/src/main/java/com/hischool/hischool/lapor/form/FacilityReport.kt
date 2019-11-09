@@ -17,6 +17,7 @@ import com.hischool.hischool.data.entity.Report
 import com.hischool.hischool.data.entity.User
 import com.hischool.hischool.utils.AuthHelper
 import com.hischool.hischool.utils.ButtonHelper
+import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.activity_facility_report.*
 import java.io.IOException
 import java.util.*
@@ -76,14 +77,14 @@ class FacilityReport : AppCompatActivity() {
             val ref = storage.child("images/${reportId}.jpg")
 
             ref.putFile(filePath!!).addOnSuccessListener {
-                Toast.makeText(this, "Laporan berhasil terkirim...", Toast.LENGTH_SHORT).show()
+                Toasty.success(this, "Laporan berhasil terkirim...", Toast.LENGTH_SHORT).show()
                 frame_loading.visibility = View.GONE
                 btnUpload.visibility = View.VISIBLE
                 imagePreview.setImageBitmap(null)
                 edtReportDescription.setText("")
                 edtReportDescription.visibility = View.VISIBLE
             }.addOnFailureListener {
-                Toast.makeText(this, "Gagal, " + it.message, Toast.LENGTH_LONG).show()
+                Toasty.error(this, "Gagal, " + it.message, Toast.LENGTH_LONG).show()
                 frame_loading.visibility = View.GONE
                 edtReportDescription.visibility = View.VISIBLE
             }

@@ -18,12 +18,14 @@ import com.hischool.hischool.data.entity.Menu
 import com.hischool.hischool.utils.NumberFormatter
 import kotlinx.android.synthetic.main.item_row_chart.view.*
 
-class ChartAdapter(val context: Context, val firestore: FirebaseFirestore) :
-    RecyclerView.Adapter<ChartAdapter.ViewHolder>() {
+class CartAdapter(val context: Context, val firestore: FirebaseFirestore) :
+    RecyclerView.Adapter<CartAdapter.ViewHolder>() {
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
-    private val chartItems = ArrayList<Cart>()
-    private val chartItemIds = ArrayList<String>()
+    val cartItems = ArrayList<Cart>()
+    val cartItemMenus = ArrayList<Menu>()
+
+    private val cartItemIds = ArrayList<String>()
 
     var userId: String? = null
     var emptyView: TextView? = null
@@ -34,21 +36,20 @@ class ChartAdapter(val context: Context, val firestore: FirebaseFirestore) :
         firestore.collection("carts").whereEqualTo("userId", userId)
             .orderBy("timestamp", Query.Direction.DESCENDING).get().addOnSuccessListener {
                 val listCart: List<Cart> = it.toObjects()
-                val listCartId = ArrayList<String>()
+
+                cartItems.clear()
+                cartItemMenus.clear()
+                cartItemIds.clear()
 
                 for (d in it) {
-                    listCartId.add(d.id)
+                    cartItemIds.add(d.id)
                 }
 
-                chartItems.clear()
-                chartItemIds.clear()
-
-                chartItems.addAll(listCart)
-                chartItemIds.addAll(listCartId)
+                cartItems.addAll(listCart)
 
                 stillDeleting = false
 
-                if (chartItems.size <= 0) {
+                if (cartItems.size <= 0) {
                     emptyView?.visibility = View.VISIBLE
                 } else {
                     emptyView?.visibility = View.GONE
@@ -61,7 +62,7 @@ class ChartAdapter(val context: Context, val firestore: FirebaseFirestore) :
     private fun deleteItemAt(position: Int, deleteItem: Boolean = false) {
         try {
             if (deleteItem) {
-                firestore.collection("carts").document(chartItemIds[position]).delete()
+                firestore.collection("carts").document(cartItemIds[position]).delete()
                     .addOnSuccessListener {
                         loadChartItems()
                     }.addOnFailureListener {
@@ -70,8 +71,8 @@ class ChartAdapter(val context: Context, val firestore: FirebaseFirestore) :
                     }
             }
 
-            chartItems.removeAt(position)
-            chartItemIds.removeAt(position)
+            cartItems.removeAt(position)
+            cartItemIds.removeAt(position)
             notifyItemRemoved(position)
         } catch (e: IndexOutOfBoundsException) {
 
@@ -82,7 +83,7 @@ class ChartAdapter(val context: Context, val firestore: FirebaseFirestore) :
         val batch = firestore.batch()
         val idClones = ArrayList<String>()
 
-        idClones.addAll(chartItemIds)
+        idClones.addAll(cartItemIds)
 
         for (id in idClones) {
             deleteItemAt(0)
@@ -104,13 +105,15 @@ class ChartAdapter(val context: Context, val firestore: FirebaseFirestore) :
         return ViewHolder(view)
     }
 
-    override fun getItemCount(): Int = chartItems.size
+    override fun getItemCount(): Int = cartItems.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val chartItem = chartItems[position]
+        val chartItem = cartItems[position]
 
         firestore.collection("menus").document(chartItem.menuId!!).get().addOnSuccessListener {
             val menu: Menu = it.toObject()!!
+
+            cartItemMenus.add(menu)
 
             holder.itemView.tv_chart_food_name.text = menu.name
             holder.itemView.tv_chart_food_price.text =

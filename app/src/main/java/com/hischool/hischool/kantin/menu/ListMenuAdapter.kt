@@ -14,6 +14,7 @@ import com.hischool.hischool.R
 import com.hischool.hischool.data.entity.Cart
 import com.hischool.hischool.data.entity.Menu
 import com.hischool.hischool.utils.NumberFormatter
+import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.item_row_menu.view.*
 
 class ListMenuAdapter(private val context: Context, private val firestore: FirebaseFirestore) :
@@ -66,14 +67,17 @@ class ListMenuAdapter(private val context: Context, private val firestore: Fireb
 
         holder.itemView.iv_menu_image_banner.setOnClickListener {
             if (userId != null) {
-                Toast.makeText(context, "Menambahkan ${menu.name} ke keranjang", Toast.LENGTH_SHORT)
-                    .show()
+                Toasty.success(
+                    context,
+                    "${menu.name} ditambahkan ke keranjang!",
+                    Toast.LENGTH_SHORT,
+                    true
+                ).show()
 
                 firestore.collection("carts").add(
                     Cart(menu.schoolId, userId, listMenuId[position])
                 ).addOnFailureListener {
-                    Toast.makeText(context, it.message, Toast.LENGTH_LONG)
-                        .show()
+                    Toasty.error(context, it.message.toString(), Toast.LENGTH_SHORT, true).show()
                 }
             }
         }

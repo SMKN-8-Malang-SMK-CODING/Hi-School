@@ -16,9 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".lapor.form.FacilityReport"></activity>
-        <activity android:name=".lapor.FasilitasActivity" />
-        <activity android:name=".lapor.form.FasilitasReport" />
+        <activity android:name=".lapor.form.FacilityReport" />
         <activity android:name=".lapor.form.ViolationReport" />
         <activity
             android:name=".lapor.LaporActivity"

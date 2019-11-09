@@ -13,6 +13,7 @@ import com.google.firebase.firestore.FirebaseFirestoreSettings
 import com.hischool.hischool.R
 import com.hischool.hischool.home.HomeActivity
 import com.hischool.hischool.utils.KeyboardHelper
+import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
@@ -72,19 +73,14 @@ class LoginActivity : AppCompatActivity() {
                 }.addOnFailureListener {
                     stopLoading()
 
+                    var errorMessage = it.message
+
                     when ((it as FirebaseAuthException).errorCode) {
-                        "ERROR_USER_NOT_FOUND" -> Toast.makeText(
-                            this,
-                            "Email tidak terdaftar...",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                        "ERROR_WRONG_PASSWORD" -> Toast.makeText(
-                            this,
-                            "Password salah...",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                        else -> Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
+                        "ERROR_USER_NOT_FOUND" -> errorMessage = "Email tidak terdaftar..."
+                        "ERROR_WRONG_PASSWORD" -> errorMessage = "Password salah..."
                     }
+
+                    Toasty.error(this, errorMessage.toString(), Toast.LENGTH_SHORT).show()
                 }
         }
     }
