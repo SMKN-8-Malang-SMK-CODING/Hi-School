@@ -10,6 +10,7 @@ data class Report(
     var reportId: String?,
     var description: String?,
     var type: String?,
+    var status: String? = "pending",
     @ServerTimestamp
     var timestamp: Date? = null
 )

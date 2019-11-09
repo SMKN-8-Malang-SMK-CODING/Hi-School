@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthException
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
 import com.hischool.hischool.R
@@ -71,7 +72,19 @@ class LoginActivity : AppCompatActivity() {
                 }.addOnFailureListener {
                     stopLoading()
 
-                    Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
+                    when ((it as FirebaseAuthException).errorCode) {
+                        "ERROR_USER_NOT_FOUND" -> Toast.makeText(
+                            this,
+                            "Email tidak terdaftar...",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        "ERROR_WRONG_PASSWORD" -> Toast.makeText(
+                            this,
+                            "Password salah...",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        else -> Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
+                    }
                 }
         }
     }

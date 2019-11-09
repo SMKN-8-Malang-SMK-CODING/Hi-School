@@ -4,15 +4,21 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.hischool.hischool.R
-import com.hischool.hischool.data.entity.ChartItem
 import com.hischool.hischool.utils.ButtonHelper
 import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator
 import kotlinx.android.synthetic.main.activity_chart.*
 
 class ChartActivity : AppCompatActivity() {
+    companion object {
+        const val EXTRA_USER_ID: String = "extra_user_id"
+    }
 
-    private val chartAdapter = ChartAdapter(this)
+    private val firestore = Firebase.firestore
+
+    private val chartAdapter = ChartAdapter(this, firestore)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,7 +27,7 @@ class ChartActivity : AppCompatActivity() {
         ButtonHelper.setupBackButton(this, btnChartBack)
 
         ButtonHelper.setupWideClick(btn_clear_chart, View.OnClickListener {
-            chartAdapter.deleteItemAt(0)
+            chartAdapter.deleteAllItems()
         })
 
         rv_list_chart_container.apply {
@@ -30,125 +36,11 @@ class ChartActivity : AppCompatActivity() {
             itemAnimator = SlideInLeftAnimator()
         }
 
-        val charts = arrayListOf(
-            ChartItem(
-                1,
-                "Bakso",
-                "Enak cuy",
-                5000,
-                "https://media-cdn.tripadvisor.com/media/photo-s/15/c5/a4/14/pepperoni-lovers.jpg"
-            ),
-            ChartItem(
-                1,
-                "Bakso",
-                "Enak cuy",
-                5000,
-                "https://media-cdn.tripadvisor.com/media/photo-s/15/c5/a4/14/pepperoni-lovers.jpg"
-            ), ChartItem(
-                1,
-                "Bakso",
-                "Enak cuy",
-                5000,
-                "https://media-cdn.tripadvisor.com/media/photo-s/15/c5/a4/14/pepperoni-lovers.jpg"
-            ), ChartItem(
-                1,
-                "Bakso",
-                "Enak cuy",
-                5000,
-                "https://media-cdn.tripadvisor.com/media/photo-s/15/c5/a4/14/pepperoni-lovers.jpg"
-            ), ChartItem(
-                1,
-                "Bakso",
-                "Enak cuy",
-                5000,
-                "https://media-cdn.tripadvisor.com/media/photo-s/15/c5/a4/14/pepperoni-lovers.jpg"
-            ), ChartItem(
-                1,
-                "Bakso",
-                "Enak cuy",
-                5000,
-                "https://media-cdn.tripadvisor.com/media/photo-s/15/c5/a4/14/pepperoni-lovers.jpg"
-            ), ChartItem(
-                1,
-                "Bakso",
-                "Enak cuy",
-                5000,
-                "https://media-cdn.tripadvisor.com/media/photo-s/15/c5/a4/14/pepperoni-lovers.jpg"
-            ), ChartItem(
-                1,
-                "Bakso",
-                "Enak cuy",
-                5000,
-                "https://media-cdn.tripadvisor.com/media/photo-s/15/c5/a4/14/pepperoni-lovers.jpg"
-            ), ChartItem(
-                1,
-                "Bakso",
-                "Enak cuy",
-                5000,
-                "https://media-cdn.tripadvisor.com/media/photo-s/15/c5/a4/14/pepperoni-lovers.jpg"
-            ), ChartItem(
-                1,
-                "Bakso",
-                "Enak cuy",
-                5000,
-                "https://media-cdn.tripadvisor.com/media/photo-s/15/c5/a4/14/pepperoni-lovers.jpg"
-            ), ChartItem(
-                1,
-                "Bakso",
-                "Enak cuy",
-                5000,
-                "https://media-cdn.tripadvisor.com/media/photo-s/15/c5/a4/14/pepperoni-lovers.jpg"
-            ), ChartItem(
-                1,
-                "Bakso",
-                "Enak cuy",
-                5000,
-                "https://media-cdn.tripadvisor.com/media/photo-s/15/c5/a4/14/pepperoni-lovers.jpg"
-            ), ChartItem(
-                1,
-                "Bakso",
-                "Enak cuy",
-                5000,
-                "https://media-cdn.tripadvisor.com/media/photo-s/15/c5/a4/14/pepperoni-lovers.jpg"
-            ), ChartItem(
-                1,
-                "Bakso",
-                "Enak cuy",
-                5000,
-                "https://media-cdn.tripadvisor.com/media/photo-s/15/c5/a4/14/pepperoni-lovers.jpg"
-            ), ChartItem(
-                1,
-                "Bakso",
-                "Enak cuy",
-                5000,
-                "https://media-cdn.tripadvisor.com/media/photo-s/15/c5/a4/14/pepperoni-lovers.jpg"
-            ), ChartItem(
-                1,
-                "Bakso",
-                "Enak cuy",
-                5000,
-                "https://media-cdn.tripadvisor.com/media/photo-s/15/c5/a4/14/pepperoni-lovers.jpg"
-            ), ChartItem(
-                1,
-                "Bakso",
-                "Enak cuy",
-                5000,
-                "https://media-cdn.tripadvisor.com/media/photo-s/15/c5/a4/14/pepperoni-lovers.jpg"
-            ), ChartItem(
-                1,
-                "Bakso",
-                "Enak cuy",
-                5000,
-                "https://media-cdn.tripadvisor.com/media/photo-s/15/c5/a4/14/pepperoni-lovers.jpg"
-            ), ChartItem(
-                1,
-                "Bakso",
-                "Enak cuy",
-                5000,
-                "https://media-cdn.tripadvisor.com/media/photo-s/15/c5/a4/14/pepperoni-lovers.jpg"
-            )
-        )
+        //loadChart(intent.getStringExtra(EXTRA_USER_ID))
 
-        chartAdapter.setChartItems(charts)
+        chartAdapter.emptyView = tvEmptyCart
+        chartAdapter.userId = intent.getStringExtra(EXTRA_USER_ID)
+        chartAdapter.loadChartItems()
+
     }
 }

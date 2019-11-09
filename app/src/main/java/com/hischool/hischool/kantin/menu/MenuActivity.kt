@@ -2,74 +2,80 @@ package com.hischool.hischool.kantin.menu
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObjects
+import com.google.firebase.ktx.Firebase
 import com.hischool.hischool.R
 import com.hischool.hischool.data.entity.Menu
 import com.hischool.hischool.kantin.chart.ChartActivity
 import com.hischool.hischool.utils.AuthHelper
 import com.hischool.hischool.utils.ButtonHelper
-import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter
 import kotlinx.android.synthetic.main.activity_menu.*
 
 class MenuActivity : AppCompatActivity() {
     companion object {
         const val EXTRA_TITLE: String = "extra_title"
+        const val EXTRA_KANTIN_ID: String = "extra_kantin_id"
     }
+
+    private var currentUser: FirebaseUser? = null
+
+    private val firestore = Firebase.firestore
+
+    private val menuAdapter = ListMenuAdapter(this, firestore)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
 
-        AuthHelper.loginCheck(this)
+        currentUser = AuthHelper.loginCheck(this)
+
         ButtonHelper.setupBackButton(this, btnKantinMenuBack)
 
         ButtonHelper.setupWideClick(btnOpenChart, View.OnClickListener {
-            startActivity(Intent(this, ChartActivity::class.java))
+            val intent = Intent(this, ChartActivity::class.java)
+
+            intent.putExtra(ChartActivity.EXTRA_USER_ID, currentUser?.uid!!)
+
+            startActivity(intent)
         })
 
         tvMenuTitle.text = intent.getStringExtra(EXTRA_TITLE)!!
 
-        val listMenu = arrayListOf(
-            Menu(
-                1,
-                "Pizza",
-                260000,
-                "https://media-cdn.tripadvisor.com/media/photo-s/15/c5/a4/14/pepperoni-lovers.jpg"
-            ),
-            Menu(
-                1,
-                "T-Bone Steak",
-                75000,
-                "https://images-gmi-pmc.edge-generalmills.com/b57ee35f-bce2-4229-8bf5-19b97876a4cb.jpg"
-            ),
-            Menu(
-                1,
-                "Kebab",
-                2000,
-                "https://www.palmia.co.id/media/recipe/medium/0dd0dc65af50d243a646a620cc07818f.jpg"
-            ),
-            Menu(
-                1,
-                "Southern Fried Chicken",
-                20000,
-                "https://sparkpeo.hs.llnwd.net/e1/resize/630m620/e4/nw/9/5/lSouthern-Fried-Chicken951607233.jpg"
-            )
-        )
+        val kantinId = intent.getIntExtra(EXTRA_KANTIN_ID, 0)
+
+        menuAdapter.setUserId(currentUser?.uid!!)
 
         rv_list_menu_container.apply {
             layoutManager = LinearLayoutManager(this@MenuActivity)
-            adapter = AlphaInAnimationAdapter(
-                ListMenuAdapter(
-                    this@MenuActivity,
-                    listMenu
-                )
-            ).apply {
-                setFirstOnly(false)
-            }
-
-            setHasFixedSize(true)
+            adapter = menuAdapter
         }
+
+        loadKantinMenus(kantinId)
     }
+
+    private fun loadKantinMenus(kantinId: Int) {
+        firestore.collection("menus").whereEqualTo("kantinId", kantinId).get()
+            .addOnSuccessListener {
+                logi(it.size().toString())
+
+                val menu: List<Menu> = it.toObjects()
+                val ids = ArrayList<String>()
+
+                for (d in it) {
+                    ids.add(d.id)
+                }
+
+//                ShimmerHelper.stopShimmer(shimmer_list_kantin)
+
+                menuAdapter.setMenus(menu as ArrayList<Menu>, ids)
+            }
+    }
+
+    inline fun <reified T> T.logi(message: String) = Log.i(T::class.java.simpleName, message)
 }

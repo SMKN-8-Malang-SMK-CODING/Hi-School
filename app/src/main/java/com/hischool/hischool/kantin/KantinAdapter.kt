@@ -55,6 +55,7 @@ class KantinAdapter(private val context: Context) :
             val intent = Intent(context, MenuActivity::class.java)
 
             intent.putExtra(MenuActivity.EXTRA_TITLE, kantin.name)
+            intent.putExtra(MenuActivity.EXTRA_KANTIN_ID, kantin.kantinId)
 
             context.startActivity(intent)
         }

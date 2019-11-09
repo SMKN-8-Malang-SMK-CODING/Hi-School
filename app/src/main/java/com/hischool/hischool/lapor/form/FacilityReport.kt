@@ -83,7 +83,7 @@ class FacilityReport : AppCompatActivity() {
                 edtReportDescription.setText("")
                 edtReportDescription.visibility = View.VISIBLE
             }.addOnFailureListener {
-                Toast.makeText(this, "Gagal, " + it.message, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Gagal, " + it.message, Toast.LENGTH_LONG).show()
                 frame_loading.visibility = View.GONE
                 edtReportDescription.visibility = View.VISIBLE
             }

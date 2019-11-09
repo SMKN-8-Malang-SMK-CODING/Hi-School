@@ -69,6 +69,7 @@
         android:layout_width="match_parent"
         android:layout_height="170dp"
         android:clipToPadding="false"
+        android:elevation="100dp"
         android:foregroundGravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -76,13 +77,16 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_list_kantin_container"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="150dp"
+        android:clipToPadding="false"
+        android:overScrollMode="never"
+        android:paddingTop="28dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/vp_food_banner_container"
+        app:layout_constraintEnd_toEndOf="@+id/et_kantin_search"
+        app:layout_constraintStart_toStartOf="@+id/et_kantin_search"
+        app:layout_constraintTop_toBottomOf="@+id/shimmer_food_banner"
         tools:listitem="@layout/item_row_kantin" />
 
     <com.facebook.shimmer.ShimmerFrameLayout

@@ -20,7 +20,7 @@
             android:layout_height="55dp"
             android:layout_centerVertical="true"
             android:layout_marginStart="8dp"
-            android:src="@drawable/steak"
+            android:src="@color/colorShimmerHighlight"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -31,24 +31,24 @@
             android:layout_height="0dp"
             android:layout_marginStart="8dp"
             android:layout_weight="1"
-            android:gravity="bottom"
+            android:gravity="center"
             android:textSize="15sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/tv_chart_food_desc"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/iv_chart_food_image"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Bakso" />
+            tools:text="Loading..." />
 
-        <TextView
-            android:id="@+id/tv_chart_food_desc"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:textSize="13sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/tv_chart_food_name"
-            app:layout_constraintTop_toBottomOf="@+id/tv_chart_food_name"
-            tools:text="Pak Dadang" />
+        <!--        <TextView-->
+        <!--            android:id="@+id/tv_chart_food_desc"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="0dp"-->
+        <!--            android:layout_weight="1"-->
+        <!--            android:textSize="13sp"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintStart_toStartOf="@+id/tv_chart_food_name"-->
+        <!--            app:layout_constraintTop_toBottomOf="@+id/tv_chart_food_name"-->
+        <!--            tools:text="Pak Dadang" />-->
 
         <Button
             android:id="@+id/btnDeleteSingleItem"
@@ -63,12 +63,12 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/tv_chart_food_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="12dp"
             android:layout_marginBottom="12dp"
-            android:text="Rp6000"
+            android:text="Rp0"
             android:textColor="@color/colorPrimary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
