@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.google.firebase.FirebaseException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthException
 import com.google.firebase.firestore.FirebaseFirestore
@@ -44,7 +45,7 @@ class LoginActivity : AppCompatActivity() {
                 notValid = true
             }
 
-            if (!KeyboardHelper.isValidEmail(email)) {
+            if (email.isNotEmpty() && !KeyboardHelper.isValidEmail(email)) {
                 edt_login_input_email.error = "Harap isi email anda dengan benar"
                 notValid = true
             }
@@ -75,9 +76,15 @@ class LoginActivity : AppCompatActivity() {
 
                     var errorMessage = it.message
 
-                    when ((it as FirebaseAuthException).errorCode) {
-                        "ERROR_USER_NOT_FOUND" -> errorMessage = "Email tidak terdaftar..."
-                        "ERROR_WRONG_PASSWORD" -> errorMessage = "Password salah..."
+                    try {
+                        when ((it as FirebaseAuthException).errorCode) {
+                            "ERROR_USER_NOT_FOUND" -> errorMessage = "Email tidak terdaftar..."
+                            "ERROR_WRONG_PASSWORD" -> errorMessage = "Password salah..."
+                        }
+                    } catch (e: ClassCastException) {
+                        val exception = it as FirebaseException
+
+                        errorMessage = exception.message
                     }
 
                     Toasty.error(this, errorMessage.toString(), Toast.LENGTH_SHORT).show()

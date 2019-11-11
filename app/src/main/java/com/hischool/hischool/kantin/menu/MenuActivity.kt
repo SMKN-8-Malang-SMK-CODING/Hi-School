@@ -8,9 +8,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.ktx.Firebase
 import com.hischool.hischool.R
+import com.hischool.hischool.data.entity.Kantin
 import com.hischool.hischool.data.entity.Menu
 import com.hischool.hischool.kantin.chart.ChartActivity
 import com.hischool.hischool.utils.AuthHelper
@@ -45,9 +47,19 @@ class MenuActivity : AppCompatActivity() {
             startActivity(intent)
         })
 
-        tvMenuTitle.text = intent.getStringExtra(EXTRA_TITLE)!!
+        val kantinId = intent.getStringExtra(EXTRA_KANTIN_ID)
 
-        val kantinId = intent.getIntExtra(EXTRA_KANTIN_ID, 0)
+        val title = intent.getStringExtra(EXTRA_TITLE)
+
+        if (title != null) {
+            tvMenuTitle.text = title
+        } else {
+            firestore.collection("kantin").document(kantinId).get().addOnSuccessListener {
+                val kantin: Kantin = it.toObject()!!
+
+                tvMenuTitle.text = kantin.name
+            }
+        }
 
         menuAdapter.setUserId(currentUser?.uid!!)
 
@@ -59,7 +71,7 @@ class MenuActivity : AppCompatActivity() {
         loadKantinMenus(kantinId)
     }
 
-    private fun loadKantinMenus(kantinId: Int) {
+    private fun loadKantinMenus(kantinId: String) {
         firestore.collection("menus").whereEqualTo("kantinId", kantinId).get()
             .addOnSuccessListener {
                 logi(it.size().toString())

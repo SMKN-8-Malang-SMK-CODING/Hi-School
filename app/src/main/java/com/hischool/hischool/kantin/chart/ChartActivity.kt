@@ -1,19 +1,20 @@
 package com.hischool.hischool.kantin.chart
 
 import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import com.hischool.hischool.R
 import com.hischool.hischool.data.entity.Order
+import com.hischool.hischool.kantin.order.OrderActivity
 import com.hischool.hischool.utils.ButtonHelper
 import com.hischool.hischool.utils.DialogHelper
 import com.hischool.hischool.utils.NumberFormatter
-import es.dmoral.toasty.Toasty
 import jp.wasabeef.recyclerview.animators.SlideInRightAnimator
 import kotlinx.android.synthetic.main.activity_chart.*
 
@@ -34,6 +35,26 @@ class ChartActivity : AppCompatActivity() {
 
         val userId = intent.getStringExtra(EXTRA_USER_ID)
 
+        // check if user already have an order
+        firestore.collection("orders").whereEqualTo("userId", userId).get().addOnSuccessListener {
+            if (it.size() > 0) {
+                for (orderDoc in it.documents) {
+                    val order: Order = orderDoc.toObject()!!
+
+                    if (order.status != "completed") {
+                        moveToOrder(orderDoc.id)
+                        return@addOnSuccessListener
+                    }
+                }
+
+                setupCartData(userId)
+            } else {
+                setupCartData(userId)
+            }
+        }
+    }
+
+    private fun setupCartData(userId: String) {
         ButtonHelper.setupWideClick(btn_clear_chart, View.OnClickListener {
             DialogHelper.yesNoDialog(
                 this,
@@ -41,10 +62,6 @@ class ChartActivity : AppCompatActivity() {
                 listener = object : DialogHelper.YesNoListener {
                     override fun onYes(dialog: DialogInterface, id: Int) {
                         chartAdapter.deleteAllItems()
-                    }
-
-                    override fun onNo(dialog: DialogInterface, id: Int) {
-
                     }
                 })
 
@@ -87,7 +104,7 @@ class ChartActivity : AppCompatActivity() {
                                 userId,
                                 orderMessage,
                                 totalPrice.toString(),
-                                "open"
+                                "pending"
                             )
 
                             DialogHelper.yesNoDialog(
@@ -102,29 +119,15 @@ class ChartActivity : AppCompatActivity() {
                                 listener = object : DialogHelper.YesNoListener {
 
                                     override fun onYes(dialog: DialogInterface, id: Int) {
+                                        chartAdapter.deleteAllItems()
+
                                         firestore.collection("orders").add(order)
                                             .addOnSuccessListener {
-                                                chartAdapter.deleteAllItems()
+                                                moveToOrder(it.id)
                                             }
-
-                                        Toasty.warning(
-                                            this@ChartActivity,
-                                            "Order: $order",
-                                            Toast.LENGTH_LONG,
-                                            true
-                                        )
-                                            .show()
-                                    }
-
-                                    override fun onNo(dialog: DialogInterface, id: Int) {
-
                                     }
                                 }
                             )
-                        }
-
-                        override fun onNo(dialog: DialogInterface, id: Int) {
-
                         }
                     })
             }
@@ -139,8 +142,18 @@ class ChartActivity : AppCompatActivity() {
         //loadChart(intent.getStringExtra(EXTRA_USER_ID))
 
         chartAdapter.emptyView = tvEmptyCart
+        chartAdapter.loadingView = pb_loading_indicator
         chartAdapter.userId = userId
         chartAdapter.loadChartItems()
+    }
 
+    private fun moveToOrder(id: String) {
+        val intent = Intent(this@ChartActivity, OrderActivity::class.java)
+
+        intent.flags = (Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+
+        intent.putExtra(OrderActivity.EXTRA_ORDER_ID, id)
+
+        startActivity(intent)
     }
 }

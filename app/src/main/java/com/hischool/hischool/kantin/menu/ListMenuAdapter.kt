@@ -1,7 +1,6 @@
 package com.hischool.hischool.kantin.menu
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -48,14 +47,11 @@ class ListMenuAdapter(private val context: Context, private val firestore: Fireb
     }
 
     override fun getItemCount(): Int {
-        logi("getItemCont: ${listMenu.size}")
         return listMenu.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val menu = listMenu[position]
-
-        logi("$menu")
 
         Glide.with(context).load(menu.imageUrl)
             .apply(RequestOptions().override(550, 280))
@@ -83,7 +79,5 @@ class ListMenuAdapter(private val context: Context, private val firestore: Fireb
         }
     }
 
-    inline fun <reified T> T.logi(message: String) = Log.i(T::class.java.simpleName, message)
-
-
+//    inline fun <reified T> T.logi(message: String) = Log.i(T::class.java.simpleName, message)
 }

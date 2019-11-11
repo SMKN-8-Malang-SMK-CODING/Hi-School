@@ -18,8 +18,9 @@ object DialogHelper {
         builder.setMessage(message).setCancelable(true)
             .setPositiveButton(yesMessage) { dialog, which ->
                 listener.onYes(dialog, which)
-            }.setNegativeButton(noMessage) { dialog, which ->
-                listener.onNo(dialog, which)
+            }
+            .setNegativeButton(noMessage) { dialog, which ->
+                //                listener.onNo(dialog, which)
             }
 
         if (title.isNotEmpty()) {
@@ -31,6 +32,6 @@ object DialogHelper {
 
     interface YesNoListener {
         fun onYes(dialog: DialogInterface, id: Int)
-        fun onNo(dialog: DialogInterface, id: Int)
+//        fun onNo(dialog: DialogInterface, id: Int)
     }
 }

@@ -17,18 +17,18 @@ class KantinAdapter(private val context: Context) :
     RecyclerView.Adapter<KantinAdapter.ViewHolder>() {
 
     private var listKantin = ArrayList<Kantin>()
+    private var listKantinId = ArrayList<String>()
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
-    fun setKantin(listKantin: ArrayList<Kantin>) {
+    fun setKantin(listKantin: List<Kantin>, listId: ArrayList<String>) {
         this.listKantin.clear()
-        this.listKantin.addAll(listKantin)
-        notifyDataSetChanged()
-    }
+        this.listKantinId.clear()
 
-    fun addKantin(position: Int, kantin: Kantin) {
-        this.listKantin.add(position, kantin)
-        notifyItemInserted(position)
+        this.listKantin.addAll(listKantin)
+        this.listKantinId.addAll(listId)
+
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -55,7 +55,7 @@ class KantinAdapter(private val context: Context) :
             val intent = Intent(context, MenuActivity::class.java)
 
             intent.putExtra(MenuActivity.EXTRA_TITLE, kantin.name)
-            intent.putExtra(MenuActivity.EXTRA_KANTIN_ID, kantin.kantinId)
+            intent.putExtra(MenuActivity.EXTRA_KANTIN_ID, listKantinId[position])
 
             context.startActivity(intent)
         }

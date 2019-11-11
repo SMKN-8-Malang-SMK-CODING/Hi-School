@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
@@ -29,6 +30,7 @@ class CartAdapter(val context: Context, val firestore: FirebaseFirestore) :
 
     var userId: String? = null
     var emptyView: TextView? = null
+    var loadingView: ProgressBar? = null
 
     private var stillDeleting = false
 
@@ -36,6 +38,8 @@ class CartAdapter(val context: Context, val firestore: FirebaseFirestore) :
         firestore.collection("carts").whereEqualTo("userId", userId)
             .orderBy("timestamp", Query.Direction.DESCENDING).get().addOnSuccessListener {
                 val listCart: List<Cart> = it.toObjects()
+
+                loadingView?.visibility = View.GONE
 
                 cartItems.clear()
                 cartItemMenus.clear()

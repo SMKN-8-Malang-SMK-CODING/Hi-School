@@ -11,5 +11,6 @@ data class Order(
     var status: String? = "",
     @ServerTimestamp
     var orderTime: Date? = null,
+    var courierId: String? = null,
     var completeTime: Date? = null
 )

@@ -5,6 +5,7 @@ data class User(
     var uid: String? = "",
     var fullName: String? = "",
     var nickname: String? = "",
+    var classRoom: String? = "",
     var email: String? = "",
     var photoUrl: String? = ""
 )

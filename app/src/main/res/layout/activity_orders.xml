@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".kantin.chart.ChartActivity">
+    tools:context=".kantin.orders.OrdersActivity">
 
     <Button
-        android:id="@+id/btnChartBack"
+        android:id="@+id/btnOrdersBack"
         android:layout_width="17dp"
         android:layout_height="32dp"
         android:layout_marginStart="24dp"
@@ -20,64 +20,37 @@
         android:id="@+id/tvMenuTitle2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Keranjang"
+        android:text="Orders"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/btnChartBack"
+        app:layout_constraintBottom_toBottomOf="@+id/btnOrdersBack"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/btnChartBack" />
+        app:layout_constraintTop_toTopOf="@+id/btnOrdersBack" />
 
-    <ImageView
-        android:id="@+id/btn_clear_chart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        app:layout_constraintBottom_toBottomOf="@+id/btnChartBack"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/btnChartBack"
-        app:srcCompat="@drawable/bg_btn_close_red" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_list_chart_container"
+        android:id="@+id/rv_list_orders_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="34dp"
+        android:layout_marginEnd="16dp"
         android:clipToPadding="false"
-        android:paddingTop="8dp"
-        android:paddingBottom="20dp"
-        app:layout_constraintBottom_toBottomOf="@+id/btnOrder"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvMenuTitle2"
-        tools:listitem="@layout/item_row_chart" />
-
-    <Button
-        android:id="@+id/btnOrder"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/btn_rounded"
-        android:backgroundTint="@color/colorPrimaryDark"
-        android:text="Pesan"
-        android:textColor="@android:color/white"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/rv_list_chart_container" />
+        tools:listitem="@layout/item_row_order" />
 
     <TextView
-        android:id="@+id/tvEmptyCart"
+        android:id="@+id/tvEmptyOrder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Keranjang kosong..."
+        android:text="Tidak ada orderan untuk saat ini..."
         android:textSize="18sp"
         android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/btnOrder"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvMenuTitle2" />
@@ -92,5 +65,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
