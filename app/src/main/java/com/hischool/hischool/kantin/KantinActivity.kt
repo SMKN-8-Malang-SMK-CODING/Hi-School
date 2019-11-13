@@ -2,9 +2,9 @@ package com.hischool.hischool.kantin
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.ktx.firestore
@@ -15,13 +15,12 @@ import com.hischool.hischool.R
 import com.hischool.hischool.data.entity.Kantin
 import com.hischool.hischool.data.entity.Menu
 import com.hischool.hischool.data.entity.Order
+import com.hischool.hischool.kantin.chart.ChartActivity
+import com.hischool.hischool.kantin.menu.ListMenuAdapter
 import com.hischool.hischool.kantin.order.OrderActivity
 import com.hischool.hischool.kantin.orders.OrdersActivity
 import com.hischool.hischool.kantin.orders.detail.OrderDetailActivity
-import com.hischool.hischool.utils.AuthHelper
-import com.hischool.hischool.utils.ButtonHelper
-import com.hischool.hischool.utils.KeyboardHelper
-import com.hischool.hischool.utils.ShimmerHelper
+import com.hischool.hischool.utils.*
 import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.activity_kantin.*
 
@@ -34,6 +33,10 @@ class KantinActivity : AppCompatActivity() {
 
     private val kantinAdapter = KantinAdapter(this)
     private val bannerAdapter = FoodBannerAdapter(this)
+    private val searchMenuAdapter = ListMenuAdapter(this, firestore)
+
+    private val listMenu = ArrayList<Menu>()
+    private val listMenuId = ArrayList<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,7 +47,7 @@ class KantinActivity : AppCompatActivity() {
         val userId = currentUser?.uid!!
 
         if (intent.getBooleanExtra(EXTRA_FROM_ORDER, false)) {
-            setupKantin()
+            setupKantin(userId)
         } else {
             firestore.collection("orders").whereEqualTo("courierId", userId).get()
                 .addOnSuccessListener {
@@ -81,30 +84,67 @@ class KantinActivity : AppCompatActivity() {
                         }
                     }
 
-                    setupKantin()
+                    setupKantin(userId)
                 } else {
-                    setupKantin()
+                    setupKantin(userId)
                 }
             }.addOnFailureListener {
                 Toasty.error(this, it.message.toString()).show()
             }
     }
 
-    private fun setupKantin() {
+    private fun setupKantin(userId: String) {
         ButtonHelper.setupBackButton(this, btnKantinBack)
 
         btnOrders.setOnClickListener {
             startActivity(Intent(this, OrdersActivity::class.java))
         }
 
-        et_kantin_search.setOnEditorActionListener(TextView.OnEditorActionListener { _, actionId, _ ->
+        btn_clear_search.setOnClickListener {
+            et_kantin_search.setText("")
+            setNormalMode()
+        }
 
+        ButtonHelper.setupWideClick(btnToCart, View.OnClickListener {
+            val intent = Intent(this, ChartActivity::class.java)
+
+            intent.putExtra(ChartActivity.EXTRA_USER_ID, userId)
+
+            startActivity(intent)
+        })
+
+        et_kantin_search.setOnEditorActionListener(TextView.OnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                val searchText = et_kantin_search.text
+
 
                 KeyboardHelper.hideKeyboard(this)
 
-                Toast.makeText(this, "Searching ${et_kantin_search.text}", Toast.LENGTH_SHORT)
-                    .show()
+                if (searchText.isEmpty()) {
+                    setNormalMode()
+
+                    return@OnEditorActionListener false
+                }
+
+                btn_clear_search.visibility = View.VISIBLE
+
+                if (listMenu.size > 0) {
+                    beginSearchAction(searchText.toString())
+                } else {
+                    firestore.collection("menus").get()
+                        .addOnSuccessListener {
+                            listMenu.clear()
+                            listMenuId.clear()
+
+                            listMenu.addAll(it.toObjects())
+
+                            for (d in it) {
+                                listMenuId.add(d.id)
+                            }
+
+                            beginSearchAction(searchText.toString())
+                        }
+                }
 
                 return@OnEditorActionListener true
             }
@@ -124,8 +164,54 @@ class KantinActivity : AppCompatActivity() {
             setPadding(50, 20, 50, 20)
         }
 
+        rv_list_search_menu_container.apply {
+            layoutManager = LinearLayoutManager(this@KantinActivity)
+            adapter = searchMenuAdapter
+        }
+
         loadBannerData()
         loadKantinData()
+
+        searchMenuAdapter.setUserId(userId)
+    }
+
+    private fun setNormalMode() {
+        vp_food_banner_container.visibility = View.VISIBLE
+        rv_list_kantin_container.visibility = View.VISIBLE
+        rv_list_search_menu_container.visibility = View.GONE
+        btn_clear_search.visibility = View.GONE
+        btnToCart.visibility = View.GONE
+        btnOrders.visibility = View.VISIBLE
+    }
+
+    private fun setSearchMode() {
+        vp_food_banner_container.visibility = View.GONE
+        rv_list_kantin_container.visibility = View.GONE
+        rv_list_search_menu_container.visibility = View.VISIBLE
+        btn_clear_search.visibility = View.VISIBLE
+        btnToCart.visibility = View.VISIBLE
+        btnOrders.visibility = View.GONE
+    }
+
+    private fun beginSearchAction(searchText: String) {
+        val menu = ArrayList<Menu>()
+        val ids = ArrayList<String>()
+
+        for ((i, d) in listMenu.withIndex()) {
+            val score = StringSimilarity.similarity(
+                d.name!!,
+                searchText
+            )
+
+            if (score >= 0.3f) {
+                ids.add(listMenuId[i])
+                menu.add(d)
+            }
+        }
+
+        setSearchMode()
+
+        searchMenuAdapter.setMenus(menu, ids)
     }
 
     private fun loadKantinData() {

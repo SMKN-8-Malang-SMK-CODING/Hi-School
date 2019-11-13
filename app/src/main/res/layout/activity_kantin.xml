@@ -28,6 +28,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView5" />
 
+    <Button
+        android:id="@+id/btnToCart"
+        android:layout_width="34dp"
+        android:layout_height="34dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/shopping_cart"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/textView5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView5" />
+
     <TextView
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
@@ -56,6 +67,7 @@
         android:paddingStart="50dp"
         android:paddingEnd="50dp"
         android:paddingBottom="7dp"
+        android:elevation="24dp"
         android:textColor="@android:color/secondary_text_light"
         android:textColorHint="@android:color/secondary_text_dark"
         android:textCursorDrawable="@drawable/color_cursor"
@@ -69,11 +81,25 @@
         android:layout_width="19dp"
         android:layout_height="19dp"
         android:layout_marginStart="24dp"
+        android:elevation="25dp"
         app:layout_constraintBottom_toBottomOf="@+id/et_kantin_search"
         app:layout_constraintStart_toStartOf="@+id/et_kantin_search"
         app:layout_constraintTop_toTopOf="@+id/et_kantin_search"
         app:layout_constraintVertical_bias="0.44"
         app:srcCompat="@drawable/magnifying_glass" />
+
+    <ImageView
+        android:id="@+id/btn_clear_search"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_marginEnd="30dp"
+        android:elevation="25dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/et_kantin_search"
+        app:layout_constraintEnd_toEndOf="@+id/et_kantin_search"
+        app:layout_constraintTop_toTopOf="@+id/et_kantin_search"
+        app:layout_constraintVertical_bias="0.44"
+        app:srcCompat="@drawable/bg_btn_close_red" />
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/vp_food_banner_container"
@@ -99,6 +125,23 @@
         app:layout_constraintStart_toStartOf="@+id/et_kantin_search"
         app:layout_constraintTop_toBottomOf="@+id/shimmer_food_banner"
         tools:listitem="@layout/item_row_kantin" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_list_search_menu_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="10dp"
+        android:clipToPadding="false"
+        android:overScrollMode="never"
+        android:paddingTop="74dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        tools:listitem="@layout/item_row_menu" />
 
     <com.facebook.shimmer.ShimmerFrameLayout
         android:id="@+id/shimmer_food_banner"

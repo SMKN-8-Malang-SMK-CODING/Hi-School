@@ -29,6 +29,10 @@ class LoginActivity : AppCompatActivity() {
             moveToHome()
         }
 
+        tv_to_register.setOnClickListener {
+            startActivity(Intent(this, RegisterActivity::class.java))
+        }
+
         btnLogin.setOnClickListener {
             val email = edt_login_input_email.text.toString()
             val password = edt_login_input_password.text.toString()
@@ -41,7 +45,7 @@ class LoginActivity : AppCompatActivity() {
             }
 
             if (password.isEmpty()) {
-                edt_login_input_password.error = "Password tidak boleh kosong"
+                edt_login_input_email.error = "Password tidak boleh kosong"
                 notValid = true
             }
 

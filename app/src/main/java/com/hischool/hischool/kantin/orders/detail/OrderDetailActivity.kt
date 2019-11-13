@@ -14,6 +14,8 @@ import com.hischool.hischool.R
 import com.hischool.hischool.data.entity.Order
 import com.hischool.hischool.data.entity.User
 import com.hischool.hischool.home.HomeActivity
+import com.hischool.hischool.kantin.KantinActivity
+import com.hischool.hischool.utils.AuthHelper
 import com.hischool.hischool.utils.ButtonHelper
 import com.hischool.hischool.utils.DialogHelper
 import com.hischool.hischool.utils.NumberFormatter
@@ -84,6 +86,11 @@ class OrderDetailActivity : AppCompatActivity() {
             if (snapshot != null && snapshot.exists()) {
                 val order: Order = snapshot.toObject()!!
 
+                if (order.courierId != AuthHelper.loginCheck(this)?.uid) {
+                    Toasty.error(this, "Orderan ini mungkin sudah diambil orang lain").show()
+                    moveToKantin()
+                }
+
                 firestore.collection("users").document(order.userId!!).get().addOnSuccessListener {
                     val user: User = it.toObject()!!
 
@@ -132,5 +139,17 @@ class OrderDetailActivity : AppCompatActivity() {
                 HomeActivity::class.java
             )
         )
+    }
+
+    private fun moveToKantin(clearTask: Boolean = false) {
+        val intent = Intent(this@OrderDetailActivity, KantinActivity::class.java)
+
+        intent.putExtra(KantinActivity.EXTRA_FROM_ORDER, true)
+
+        if (clearTask) {
+            intent.flags = (Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        }
+
+        startActivity(intent)
     }
 }

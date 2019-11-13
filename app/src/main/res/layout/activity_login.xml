@@ -43,19 +43,29 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
+        <TextView
+            android:id="@+id/tv_to_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Belum punya akun? Daftar."
+            app:layout_constraintEnd_toEndOf="@+id/edt_login_input_password"
+            app:layout_constraintHorizontal_bias="0.931"
+            app:layout_constraintStart_toStartOf="@+id/edt_login_input_password"
+            app:layout_constraintTop_toBottomOf="@+id/edt_login_input_password" />
+
         <Button
             android:id="@+id/btnLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
             android:background="@drawable/bg_button"
             android:fontFamily="@font/open_sans"
             android:text="@string/login"
             android:textColor="@color/colorBackground"
             android:textSize="16sp"
+            android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edt_login_input_password" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_to_register" />
 
         <ImageView
             android:id="@+id/imageView3"
