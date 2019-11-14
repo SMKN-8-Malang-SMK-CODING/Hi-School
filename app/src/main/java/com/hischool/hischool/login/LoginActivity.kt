@@ -69,7 +69,7 @@ class LoginActivity : AppCompatActivity() {
                     firestore.firestoreSettings = settings
 
                     firestore
-                        .collection("user")
+                        .collection("users")
                         .document(FirebaseAuth.getInstance().currentUser?.uid!!)
                         .get()
                         .addOnSuccessListener {

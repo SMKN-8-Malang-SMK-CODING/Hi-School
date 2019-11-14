@@ -176,7 +176,6 @@
             android:elevation="1dp"
             android:ems="10"
             android:hint="Ruang Kelas"
-            android:inputType="textPassword"
             android:paddingStart="55dp"
             android:paddingEnd="20dp"
             android:paddingBottom="5dp"
@@ -226,17 +225,18 @@
             app:layout_constraintTop_toBottomOf="@+id/edt_register_input_email" />
 
         <TextView
-            android:id="@+id/tv_to_register"
+            android:id="@+id/tv_to_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:text="Sudah punya akun? Login."
             app:layout_constraintEnd_toEndOf="@+id/edt_register_input_email"
             app:layout_constraintHorizontal_bias="0.931"
             app:layout_constraintStart_toStartOf="@+id/edt_register_input_email"
-            app:layout_constraintTop_toBottomOf="@+id/edt_login_input_password"></TextView>
+            app:layout_constraintTop_toBottomOf="@+id/edt_login_input_password" />
 
         <Button
-            android:id="@+id/btnLogin"
+            android:id="@+id/btnRegister"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
@@ -245,33 +245,37 @@
             android:text="Daftar"
             android:textColor="@color/colorBackground"
             android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_to_register" />
-
-        <ImageView
-            android:id="@+id/iv_loading_background"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:visibility="gone"
+            android:layout_marginBottom="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@color/colorBackground" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_to_login" />
 
-        <ProgressBar
-            android:id="@+id/pb_loading_indicator"
-            style="?android:attr/progressBarStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/common_google_signin_btn_text_dark_pressed"
+
+        <ImageView
+            android:id="@+id/iv_loading_background"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@android:color/white"
+            android:elevation="4dp"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <ProgressBar
+            android:id="@+id/pb_loading_indicator"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="5dp"
+            android:indeterminateTint="@color/colorPrimaryDark"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
 
