@@ -44,7 +44,7 @@ class OrderDetailActivity : AppCompatActivity() {
                 this,
                 "Batalkan menjadi pengantar?",
                 listener = object : DialogHelper.YesNoListener {
-                    override fun onYes(dialog: DialogInterface, id: Int) {
+                    override fun onYes(dialog: DialogInterface) {
                         orderRef.update("status", "pending")
                     }
                 })
@@ -55,7 +55,7 @@ class OrderDetailActivity : AppCompatActivity() {
                 this,
                 "Makanan sudah di tangan dan siap mengantarkan?",
                 listener = object : DialogHelper.YesNoListener {
-                    override fun onYes(dialog: DialogInterface, id: Int) {
+                    override fun onYes(dialog: DialogInterface) {
                         orderRef.update("status", "sending")
                     }
                 })
@@ -66,7 +66,7 @@ class OrderDetailActivity : AppCompatActivity() {
                 this,
                 "Pembayaran lunas dan barang sudah sampai?",
                 listener = object : DialogHelper.YesNoListener {
-                    override fun onYes(dialog: DialogInterface, id: Int) {
+                    override fun onYes(dialog: DialogInterface) {
                         val batch = firestore.batch()
 
                         batch.update(orderRef, "status", "completed")
@@ -139,6 +139,8 @@ class OrderDetailActivity : AppCompatActivity() {
                 HomeActivity::class.java
             )
         )
+
+        finish()
     }
 
     private fun moveToKantin(clearTask: Boolean = false) {

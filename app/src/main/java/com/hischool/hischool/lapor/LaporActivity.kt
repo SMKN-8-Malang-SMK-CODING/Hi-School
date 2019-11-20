@@ -24,5 +24,9 @@ class LaporActivity : AppCompatActivity() {
         btnLaporFasilitas.setOnClickListener {
             startActivity(Intent(this, FacilityReport::class.java))
         }
+
+        btnToReportList.setOnClickListener {
+            startActivity(Intent(this, ReportListActivity::class.java))
+        }
     }
 }

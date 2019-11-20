@@ -10,6 +10,12 @@
 
     <color name="colorShimmerBase">#A7A7A7</color>
     <color name="colorShimmerHighlight">#E6E6E6</color>
+    <color name="colorShimmerHighlightDarker">#B6B5B5</color>
 
-    <color name="gray"></color>
+    <color name="colorDarkOverlay">#4B000000</color>
+
+    <color name="colorStateRejected">#ff6b6b</color>
+    <color name="colorStateSolved">#1dd1a1</color>
+    <color name="colorStatePending">#feca57</color>
+
 </resources>

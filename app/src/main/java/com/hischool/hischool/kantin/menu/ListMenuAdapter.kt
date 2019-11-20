@@ -4,6 +4,8 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -25,6 +27,7 @@ class ListMenuAdapter(private val context: Context, private val firestore: Fireb
     private var listMenuId = ArrayList<String>()
 
     private var userId: String? = null
+    private var cart: ImageView? = null
 
     fun setUserId(uid: String) {
         userId = uid
@@ -53,6 +56,8 @@ class ListMenuAdapter(private val context: Context, private val firestore: Fireb
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val menu = listMenu[position]
 
+        val btnMenu = holder.itemView.iv_menu_image_banner
+
         Glide.with(context).load(menu.imageUrl)
             .apply(RequestOptions().override(550, 280))
             .into(holder.itemView.iv_menu_image_banner)
@@ -61,8 +66,11 @@ class ListMenuAdapter(private val context: Context, private val firestore: Fireb
         holder.itemView.tv_menu_price.text =
             NumberFormatter.formatRupiah(Integer.parseInt(menu.price!!))
 
-        holder.itemView.iv_menu_image_banner.setOnClickListener {
+        btnMenu.setOnClickListener {
             if (userId != null) {
+
+                cart?.startAnimation(AnimationUtils.loadAnimation(context, R.anim.wiggle))
+
                 Toasty.success(
                     context,
                     "${menu.name} ditambahkan ke keranjang!",
@@ -77,6 +85,10 @@ class ListMenuAdapter(private val context: Context, private val firestore: Fireb
                 }
             }
         }
+    }
+
+    fun setCartView(btnOpenChart: ImageView?) {
+        cart = btnOpenChart!!
     }
 
 //    inline fun <reified T> T.logi(message: String) = Log.i(T::class.java.simpleName, message)

@@ -45,7 +45,7 @@ class LoginActivity : AppCompatActivity() {
             }
 
             if (password.isEmpty()) {
-                edt_login_input_email.error = "Password tidak boleh kosong"
+                edt_login_input_password.error = "Password tidak boleh kosong"
                 notValid = true
             }
 
@@ -73,7 +73,16 @@ class LoginActivity : AppCompatActivity() {
                         .document(FirebaseAuth.getInstance().currentUser?.uid!!)
                         .get()
                         .addOnSuccessListener {
-                            moveToHome()
+                            if (it.exists()) {
+                                moveToHome()
+                            } else {
+                                // maybe login with admin email
+                                Toasty.error(this, "Email tidak terdaftar...", Toast.LENGTH_SHORT)
+                                    .show()
+                            }
+                        }.addOnFailureListener {
+                            stopLoading()
+                            Toasty.error(this, it.message.toString(), Toast.LENGTH_SHORT).show()
                         }
                 }.addOnFailureListener {
                     stopLoading()

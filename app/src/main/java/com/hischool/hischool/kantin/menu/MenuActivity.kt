@@ -62,6 +62,7 @@ class MenuActivity : AppCompatActivity() {
         }
 
         menuAdapter.setUserId(currentUser?.uid!!)
+        menuAdapter.setCartView(btnOpenChart)
 
         rv_list_menu_container.apply {
             layoutManager = LinearLayoutManager(this@MenuActivity)

@@ -7,6 +7,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.firestore.FirebaseFirestoreSettings
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
@@ -16,11 +17,13 @@ import com.hischool.hischool.data.entity.School
 import com.hischool.hischool.data.entity.User
 import com.hischool.hischool.home.HomeActivity
 import com.hischool.hischool.utils.KeyboardHelper
+import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.activity_register.*
 
 class RegisterActivity : AppCompatActivity() {
     val firestore = Firebase.firestore
-    val auth = FirebaseAuth.getInstance()
+
+    private val auth = FirebaseAuth.getInstance()
 
     private val listSchool = ArrayList<String>()
     private val listSchoolId = ArrayList<Int>()
@@ -44,7 +47,7 @@ class RegisterActivity : AppCompatActivity() {
             setupSchoolSpinner()
 
             tv_to_login.setOnClickListener {
-                startActivity(Intent(this, LoginActivity::class.java))
+                onBackPressed()
             }
 
             btnRegister.setOnClickListener {
@@ -65,12 +68,12 @@ class RegisterActivity : AppCompatActivity() {
                 }
 
                 if (nickname.isEmpty()) {
-                    edt_register_input_full_name.error = "Nama panggilan tidak boleh kosong"
+                    edt_register_input_nickname.error = "Nama panggilan tidak boleh kosong"
                     notValid = true
                 }
 
                 if (classRoom.isEmpty()) {
-                    edt_register_input_full_name.error = "Ruang kelas tidak boleh kosong"
+                    edt_register_input_class_room.error = "Ruang kelas tidak boleh kosong"
                     notValid = true
                 }
 
@@ -93,8 +96,7 @@ class RegisterActivity : AppCompatActivity() {
                     return@setOnClickListener
                 }
 
-                iv_loading_background.visibility = View.VISIBLE
-                pb_loading_indicator.visibility = View.VISIBLE
+                startLoading()
 
                 auth.createUserWithEmailAndPassword(email, password)
                     .addOnSuccessListener { userResult ->
@@ -102,21 +104,45 @@ class RegisterActivity : AppCompatActivity() {
                             User(school, fullName, nickname, classRoom, email, "")
                         ).addOnSuccessListener {
                             auth.signInWithEmailAndPassword(email, password).addOnSuccessListener {
-                                val settings = FirebaseFirestoreSettings.Builder()
-                                    .setPersistenceEnabled(true)
+                                val currentUser = auth.currentUser
+
+                                val profileUpdate = UserProfileChangeRequest.Builder()
+                                    .setDisplayName(nickname)
                                     .build()
 
-                                firestore.firestoreSettings = settings
+                                currentUser?.updateProfile(profileUpdate)!!.addOnSuccessListener {
+                                    val settings = FirebaseFirestoreSettings.Builder()
+                                        .setPersistenceEnabled(true)
+                                        .build()
 
-                                firestore
-                                    .collection("users")
-                                    .document(FirebaseAuth.getInstance().currentUser?.uid!!)
-                                    .get()
-                                    .addOnSuccessListener {
-                                        moveToHome()
-                                    }
+                                    firestore.firestoreSettings = settings
+
+                                    firestore
+                                        .collection("users")
+                                        .document(FirebaseAuth.getInstance().currentUser?.uid!!)
+                                        .get()
+                                        .addOnSuccessListener {
+                                            moveToHome()
+                                        }.addOnFailureListener { error ->
+                                            stopLoading()
+
+                                            Toasty.error(this, error.message.toString()).show()
+                                        }
+                                }
+                            }.addOnFailureListener { error ->
+                                stopLoading()
+
+                                Toasty.error(this, error.message.toString()).show()
                             }
+                        }.addOnFailureListener { error ->
+                            stopLoading()
+
+                            Toasty.error(this, error.message.toString()).show()
                         }
+                    }.addOnFailureListener { error ->
+                        stopLoading()
+
+                        Toasty.error(this, error.message.toString()).show()
                     }
             }
         }
@@ -154,5 +180,31 @@ class RegisterActivity : AppCompatActivity() {
 
                 }
             }
+    }
+
+    private fun startLoading() {
+        iv_loading_background.visibility = View.VISIBLE
+        pb_loading_indicator.visibility = View.VISIBLE
+
+        edt_register_input_full_name.visibility = View.GONE
+        edt_register_input_nickname.visibility = View.GONE
+        spn_register_input_school.visibility = View.GONE
+        edt_register_input_class_room.visibility = View.GONE
+        edt_register_input_email.visibility = View.GONE
+        edt_login_input_password.visibility = View.GONE
+        btnRegister.visibility = View.GONE
+    }
+
+    private fun stopLoading() {
+        iv_loading_background.visibility = View.GONE
+        pb_loading_indicator.visibility = View.GONE
+
+        edt_register_input_full_name.visibility = View.VISIBLE
+        edt_register_input_nickname.visibility = View.VISIBLE
+        spn_register_input_school.visibility = View.VISIBLE
+        edt_register_input_class_room.visibility = View.VISIBLE
+        edt_register_input_email.visibility = View.VISIBLE
+        edt_login_input_password.visibility = View.VISIBLE
+        btnRegister.visibility = View.VISIBLE
     }
 }

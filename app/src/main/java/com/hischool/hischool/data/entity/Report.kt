@@ -5,12 +5,13 @@ import com.google.firebase.firestore.ServerTimestamp
 import java.util.*
 
 data class Report(
-    var schoolId: Int?,
-    var userId: String?,
-    var reportId: String?,
-    var description: String?,
-    var type: String?,
-    var status: String? = "pending",
+    val schoolId: Int? = 0,
+    val userId: String? = "",
+    val reportId: String? = "",
+    val description: String? = "",
+    val imageUrl: String? = "",
+    val type: String? = "",
+    val status: String? = "pending",
     @ServerTimestamp
-    var timestamp: Date? = null
+    val timestamp: Date? = null
 )

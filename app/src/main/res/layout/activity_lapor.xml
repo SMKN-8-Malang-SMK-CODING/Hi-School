@@ -28,6 +28,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/btnReportBack" />
 
+    <Button
+        android:id="@+id/btnToReportList"
+        android:layout_width="34dp"
+        android:layout_height="34dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/check_list"
+        app:layout_constraintBottom_toBottomOf="@+id/textView6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView6" />
+
+
     <TextView
         android:id="@+id/textView7"
         android:layout_width="wrap_content"

@@ -11,4 +11,7 @@
     <string name="lipsum_news">Telah terjadi kehilangan barang berupa kontak sepeda motor</string>
     <string name="email">Email</string>
     <string name="loading">Loading...</string>
+    <string name="report_submit_alert_message">Yakin ingin melaporkan ini? Laporan ini tidak dapat kamu hapus.</string>
+    <string name="error_report_emtpy_description">Harap masukan deskripsi laporan!</string>
+    <string name="report_successfully_sended_message">Laporan berhasil terkirim...</string>
 </resources>

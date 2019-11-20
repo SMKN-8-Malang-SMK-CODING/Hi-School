@@ -91,7 +91,7 @@ class OrderActivity : AppCompatActivity() {
                             this,
                             "Yakin ingin membatalkan pesanan ini?",
                             listener = object : DialogHelper.YesNoListener {
-                                override fun onYes(dialog: DialogInterface, id: Int) {
+                                override fun onYes(dialog: DialogInterface) {
                                     deleteOrder(snapshot.id)
                                 }
                             })
@@ -110,6 +110,8 @@ class OrderActivity : AppCompatActivity() {
                 HomeActivity::class.java
             )
         )
+
+        finish()
     }
 
     private fun getOrderCourierData(courierId: String) {

@@ -1,11 +1,13 @@
 package com.hischool.hischool.lapor.form
 
 import android.app.Activity
+import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
+import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseUser
@@ -15,8 +17,10 @@ import com.google.firebase.storage.ktx.storage
 import com.hischool.hischool.R
 import com.hischool.hischool.data.entity.Report
 import com.hischool.hischool.data.entity.User
+import com.hischool.hischool.lapor.ReportListActivity
 import com.hischool.hischool.utils.AuthHelper
 import com.hischool.hischool.utils.ButtonHelper
+import com.hischool.hischool.utils.DialogHelper
 import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.activity_violent_report.*
 import java.io.IOException
@@ -58,37 +62,83 @@ class ViolationReport : AppCompatActivity() {
 
     private fun submitReport() {
         if (filePath != null) {
-            frame_loading.visibility = View.VISIBLE
-            edtReportDescription.visibility = View.GONE
-
-            val reportId = UUID.randomUUID().toString()
             val reportDesc = edtReportDescription.text!!.toString()
 
-            firestore.collection("reports").add(
-                Report(
-                    currentUserData?.schoolId,
-                    currentUser?.uid,
-                    reportId,
-                    reportDesc,
-                    "violation"
-                )
-            )
+            if (reportDesc.isEmpty()) {
+                edtReportDescription.error = getString(R.string.error_report_emtpy_description)
+                return
+            }
 
-            val ref = storage.child("images/${reportId}.jpg")
+            DialogHelper.yesNoDialog(
+                this,
+                getString(R.string.report_submit_alert_message),
+                listener = object : DialogHelper.YesNoListener {
+                    override fun onYes(dialog: DialogInterface) {
+                        sendReport(reportDesc)
+                    }
+                })
+        } else {
+            btnUpload.startAnimation(AnimationUtils.loadAnimation(this, R.anim.shake))
 
-            ref.putFile(filePath!!).addOnSuccessListener {
-                Toasty.success(this, "Laporan berhasil terkirim...", Toast.LENGTH_SHORT).show()
-                frame_loading.visibility = View.GONE
-                btnUpload.visibility = View.VISIBLE
-                imagePreview.setImageBitmap(null)
-                edtReportDescription.setText("")
-                edtReportDescription.visibility = View.VISIBLE
-            }.addOnFailureListener {
-                Toasty.error(this, "Gagal, " + it.message, Toast.LENGTH_LONG).show()
-                frame_loading.visibility = View.GONE
-                edtReportDescription.visibility = View.VISIBLE
+            val reportDesc = edtReportDescription.text!!.toString()
+
+            if (reportDesc.isEmpty()) {
+                edtReportDescription.error = getString(R.string.error_report_emtpy_description)
+                return
             }
         }
+    }
+
+    private fun sendReport(reportDesc: String) {
+        frame_loading.visibility = View.VISIBLE
+        edtReportDescription.visibility = View.GONE
+
+        val reportId = UUID.randomUUID().toString()
+
+        val ref = storage.child("images/${reportId}.jpg")
+
+        ref.putFile(filePath!!).addOnSuccessListener {
+            ref.downloadUrl.addOnSuccessListener {
+                firestore.collection("reports").add(
+                    Report(
+                        currentUserData?.schoolId,
+                        currentUser?.uid,
+                        reportId,
+                        reportDesc,
+                        it.toString(),
+                        "violation"
+                    )
+                ).addOnSuccessListener {
+                    onSuccessUploadingReport()
+                }.addOnFailureListener { ex ->
+                    onFailureUploadingReport(ex)
+                }
+            }
+        }.addOnFailureListener {
+            onFailureUploadingReport(it)
+        }
+    }
+
+    private fun onFailureUploadingReport(it: Exception) {
+        Toasty.error(this, "Gagal, " + it.message, Toast.LENGTH_LONG).show()
+        frame_loading.visibility = View.GONE
+        edtReportDescription.visibility = View.VISIBLE
+    }
+
+    private fun onSuccessUploadingReport() {
+        Toasty.success(
+            this,
+            getString(R.string.report_successfully_sended_message),
+            Toast.LENGTH_SHORT
+        ).show()
+
+        val intent = Intent(this, ReportListActivity::class.java)
+
+        intent.flags = Intent.FLAG_ACTIVITY_NO_HISTORY
+
+        startActivity(intent)
+
+        finish()
     }
 
     private fun chooseImage() {

@@ -4,11 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     tools:context=".lapor.form.FacilityReport">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:paddingBottom="16dp">
 
 
@@ -57,8 +59,8 @@
         <Button
             android:id="@+id/btnUpload"
             android:layout_width="43dp"
-            android:layout_height="35dp"
-            android:background="@drawable/photo_camera"
+            android:layout_height="38dp"
+            android:background="@drawable/bg_add_image"
             app:layout_constraintBottom_toBottomOf="@+id/ivContainer"
             app:layout_constraintEnd_toEndOf="@+id/ivContainer"
             app:layout_constraintStart_toStartOf="@+id/ivContainer"
@@ -95,7 +97,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:background="@drawable/bg_button"
+            android:background="@drawable/btn_rounded"
+            android:backgroundTint="@color/colorPrimary"
             android:text="Lapor"
             android:textColor="@android:color/white"
             android:textSize="20sp"

@@ -60,7 +60,7 @@ class ChartActivity : AppCompatActivity() {
                 this,
                 "Yakin menghapus semua menu di keranjang?",
                 listener = object : DialogHelper.YesNoListener {
-                    override fun onYes(dialog: DialogInterface, id: Int) {
+                    override fun onYes(dialog: DialogInterface) {
                         chartAdapter.deleteAllItems()
                     }
                 })
@@ -71,6 +71,14 @@ class ChartActivity : AppCompatActivity() {
             val items = chartAdapter.cartItems
             val menus = chartAdapter.cartItemMenus
 
+            if (items.size > 5) {
+                DialogHelper.alert(
+                    this,
+                    "Untuk saat ini, kami hanya membatasi 5 item\nHarap hapus item yang tidak kamu butuhkan."
+                )
+                return@setOnClickListener
+            }
+
             if (items.size > 0 && items.size == menus.size) {
                 DialogHelper.yesNoDialog(
                     this,
@@ -78,7 +86,7 @@ class ChartActivity : AppCompatActivity() {
                     yesMessage = "Pesan",
                     title = "Lanjutkan pemesanan?",
                     listener = object : DialogHelper.YesNoListener {
-                        override fun onYes(dialog: DialogInterface, id: Int) {
+                        override fun onYes(dialog: DialogInterface) {
                             val orders = mutableMapOf<String, Int>()
 
                             var totalPrice = 2000
@@ -118,7 +126,7 @@ class ChartActivity : AppCompatActivity() {
                                 title = "Rekap",
                                 listener = object : DialogHelper.YesNoListener {
 
-                                    override fun onYes(dialog: DialogInterface, id: Int) {
+                                    override fun onYes(dialog: DialogInterface) {
                                         chartAdapter.deleteAllItems()
 
                                         firestore.collection("orders").add(order)

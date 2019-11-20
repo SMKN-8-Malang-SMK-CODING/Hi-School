@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="16dp"
+        app:cardCornerRadius="17dp"
+        app:cardElevation="6dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/iv_report_shimmer_image_banner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:src="@color/colorShimmerHighlight" />
+
+            <ImageView
+                android:id="@+id/iv_report_shimmer_image_overlay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:src="@color/colorShimmerHighlight" />
+
+            <TextView
+                android:id="@+id/tv_report_shimmer_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:width="50dp"
+                android:height="15dp"
+                android:background="@drawable/btn_rounded"
+                android:backgroundTint="@color/colorShimmerHighlightDarker" />
+
+            <TextView
+                android:id="@+id/tv_report_shimmer_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="14dp"
+                android:width="200dp"
+                android:height="15dp"
+                android:background="@drawable/btn_rounded"
+                android:backgroundTint="@color/colorShimmerHighlightDarker"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:maxWidth="250dp"
+                android:maxLines="1" />
+
+            <TextView
+                android:id="@+id/tv_report_shimmer_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="10dp"
+                android:width="40dp"
+                android:height="24dp"
+                android:background="@drawable/btn_rounded"
+                android:backgroundTint="@color/colorShimmerHighlightDarker"
+                android:gravity="center_vertical"
+                android:maxLines="1" />
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

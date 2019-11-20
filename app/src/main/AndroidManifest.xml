@@ -16,12 +16,27 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".login.RegisterActivity"></activity>
-        <activity android:name=".kantin.orders.detail.OrderDetailActivity" />
-        <activity android:name=".kantin.orders.OrdersActivity" />
-        <activity android:name=".kantin.order.OrderActivity" />
-        <activity android:name=".lapor.form.FacilityReport" />
-        <activity android:name=".lapor.form.ViolationReport" />
+        <activity
+            android:name=".lapor.ReportListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".login.RegisterActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".kantin.orders.detail.OrderDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".kantin.orders.OrdersActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".kantin.order.OrderActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".lapor.form.FacilityReport"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".lapor.form.ViolationReport"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".lapor.LaporActivity"
             android:screenOrientation="portrait" />
@@ -37,6 +52,7 @@
         <activity
             android:name=".home.HomeActivity"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".login.LoginActivity"
             android:screenOrientation="portrait">

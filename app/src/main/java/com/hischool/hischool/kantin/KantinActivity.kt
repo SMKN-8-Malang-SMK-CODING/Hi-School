@@ -173,6 +173,7 @@ class KantinActivity : AppCompatActivity() {
         loadKantinData()
 
         searchMenuAdapter.setUserId(userId)
+        searchMenuAdapter.setCartView(btnToCart)
     }
 
     private fun setNormalMode() {

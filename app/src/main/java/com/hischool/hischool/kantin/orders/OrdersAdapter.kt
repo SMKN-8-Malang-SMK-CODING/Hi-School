@@ -83,7 +83,7 @@ class OrdersAdapter(
                 context,
                 "Pastikan uang kamu cukup, harga di aplikasi ${foodPrice}, mungkin tidak sesuai dengan harga sebenarnya!",
                 listener = object : DialogHelper.YesNoListener {
-                    override fun onYes(dialog: DialogInterface, id: Int) {
+                    override fun onYes(dialog: DialogInterface) {
                         checkAndClaimOrder(listOrderId[position])
                     }
                 }
