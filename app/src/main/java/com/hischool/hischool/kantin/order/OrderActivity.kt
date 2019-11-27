@@ -98,7 +98,7 @@ class OrderActivity : AppCompatActivity() {
                     }
                 }
             } else {
-                moveToKantin()
+                moveToKantin(true)
             }
         }
     }
