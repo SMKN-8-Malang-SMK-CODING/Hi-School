@@ -8,17 +8,17 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="220dp"
-        android:layout_marginStart="16dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="9dp"
         android:layout_marginTop="2dp"
-        android:layout_marginEnd="12dp"
+        android:layout_marginEnd="9dp"
         android:layout_marginBottom="16dp"
         app:cardCornerRadius="17dp"
         app:cardElevation="6dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/iv_report_image_banner"
@@ -26,16 +26,9 @@
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:scaleType="centerCrop"
+                android:tint="@color/colorDarkOverlay"
+                android:scaleType="centerInside"
                 tools:src="@drawable/steak" />
-
-            <ImageView
-                android:id="@+id/iv_report_image_overlay"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:scaleType="centerCrop"
-                android:src="@color/colorDarkOverlay" />
 
             <TextView
                 android:id="@+id/tv_report_type"
@@ -55,7 +48,7 @@
                 android:id="@+id/tv_report_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
+                android:layout_alignBottom="@id/iv_report_image_banner"
                 android:ellipsize="end"
                 android:gravity="center_vertical"
                 android:maxWidth="250dp"
@@ -70,7 +63,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
+                android:layout_alignBottom="@id/iv_report_image_banner"
                 android:layout_margin="8dp"
                 android:background="@drawable/btn_rounded"
                 android:backgroundTint="@color/colorPrimary"

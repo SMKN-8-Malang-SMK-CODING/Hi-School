@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObjects
@@ -31,7 +32,7 @@ class ReportListActivity : AppCompatActivity() {
         ButtonHelper.setupBackButton(this, btnListReportBack)
 
         rv_list_report_container.apply {
-            layoutManager = LinearLayoutManager(this@ReportListActivity)
+            layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             adapter = reportListAdapter
         }
 
@@ -56,6 +57,10 @@ class ReportListActivity : AppCompatActivity() {
                             tvEmptyReport.visibility = View.GONE
                         } else {
                             tvEmptyReport.visibility = View.VISIBLE
+                        }
+
+                        if(it.size() == 1) {
+                            rv_list_report_container.layoutManager = LinearLayoutManager(this)
                         }
 
                         val reports: List<Report> = it.toObjects()

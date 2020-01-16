@@ -14,4 +14,8 @@
     <string name="report_submit_alert_message">Yakin ingin melaporkan ini? Laporan ini tidak dapat kamu hapus.</string>
     <string name="error_report_emtpy_description">Harap masukan deskripsi laporan!</string>
     <string name="report_successfully_sended_message">Laporan berhasil terkirim...</string>
+    <string name="order_completed">Pesanan telah selesai diantarkan, selamat menikmati...</string>
+    <string name="order_ordering">Yeay.. makananmu sedang dibeli...</string>
+    <string name="searching_sender">Mencari pengantar...</string>
+    <string name="order_sending">Makananmu akan segera datang, siapkan uangmu...</string>
 </resources>

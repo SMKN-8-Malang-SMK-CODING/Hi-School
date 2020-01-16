@@ -59,20 +59,20 @@ class OrderActivity : AppCompatActivity() {
                 }
 
                 when (order.status) {
-                    "pending" -> Toasty.info(this, "Mencari pengantar...").show()
+                    "pending" -> Toasty.info(this, getString(R.string.searching_sender)).show()
                     "ordering" -> Toasty.success(
                         this,
-                        "Yeay.. makananmu sedang dibeli...",
+                        getString(R.string.order_ordering),
                         Toast.LENGTH_LONG
                     ).show()
                     "sending" -> Toasty.success(
                         this,
-                        "Makananmu akan segera datang, siapkan uangmu...",
+                        getString(R.string.order_sending),
                         Toast.LENGTH_LONG
                     ).show()
                     "completed" -> Toasty.success(
                         this,
-                        "Pesanan telah selesai diantarkan, selamat menikmati...",
+                        getString(R.string.order_completed),
                         Toast.LENGTH_LONG
                     ).show()
                 }
