@@ -1,6 +1,6 @@
 # H!-School
 
-Simple Go-Jek like application for school!
+Simple Go-Food like application for school!
 
 ![Hi News](screenshots/hinews.png)
 ![Hi Kantin](screenshots/hikantin.png)
